@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Aara Farmers</title>
 
 <style>
@@ -15,62 +14,100 @@
 }
 
 body {
-    background: #000;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    background: #183c16;
+    font-family: Arial, sans-serif;
 }
 
 .home {
     position: relative;
     width: 100%;
-    max-width: 1100px;
-    aspect-ratio: 522 / 270;
+    max-width: 1400px;
+    margin: auto;
+    overflow: hidden;
+    line-height: 0;
 }
 
-.home img {
+.background {
+    display: block;
     width: 100%;
-    height: 100%;
-    display: block;
+    height: auto;
+    animation: farmMotion 20s ease-in-out infinite alternate;
 }
 
-/* முழு பாக்ஸையும் கிளிக் செய்யலாம் */
+@keyframes farmMotion {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.025);
+    }
+}
 
-.button {
+/* Language buttons */
+.language {
     position: absolute;
-    display: block;
-    cursor: pointer;
+    top: 3.2%;
+    right: 2%;
+    width: 15.5%;
+    height: 6.5%;
+    display: flex;
+    z-index: 5;
+}
+
+.language button {
+    width: 50%;
+    border: none;
     background: transparent;
+    cursor: pointer;
+}
+
+/* Three complete clickable cards */
+.card {
+    position: absolute;
+    top: 44.2%;
+    height: 40%;
+    width: 29.8%;
+    display: block;
+    border-radius: 5%;
+    cursor: pointer;
+    z-index: 3;
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Calendar */
-.calendar {
-    left: 8.3%;
-    top: 45.5%;
-    width: 27.5%;
-    height: 41%;
+.card1 {
+    left: 4.5%;
 }
 
-/* Farming Tips */
-.tips {
-    left: 36.8%;
-    top: 45.5%;
-    width: 26%;
-    height: 41%;
+.card2 {
+    left: 36.1%;
 }
 
-/* Loans */
-.loans {
-    left: 63.7%;
-    top: 45.5%;
-    width: 26.5%;
-    height: 41%;
+.card3 {
+    left: 66.2%;
 }
 
-.button:focus-visible {
-    outline: 3px solid white;
+.card:focus-visible {
+    outline: 4px solid white;
+}
+
+.message {
+    position: absolute;
+    bottom: 1%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,70,0,.8);
+    color: white;
+    font-size: clamp(9px, 1.2vw, 15px);
+    padding: 7px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    z-index: 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .background {
+        animation: none;
+    }
 }
 </style>
 </head>
@@ -79,22 +116,64 @@ body {
 
 <div class="home">
 
-    <img src="aara-farmers-home.png"
-         alt="Aara Farmers Home Page">
+    <!-- Your original reference image -->
+    <img
+        class="background"
+        src="aara-farmers-home.png"
+        alt="Aara Farmers"
+    >
 
+    <!-- Language selection -->
+    <div class="language">
+        <button onclick="changeLanguage('en')"
+                aria-label="English"></button>
+
+        <button onclick="changeLanguage('ta')"
+                aria-label="தமிழ்"></button>
+    </div>
+
+    <!-- Crop Calendar -->
     <a href="crop-calendar.html"
-       class="button calendar"
-       aria-label="பயிர் நாட்காட்டி"></a>
+       class="card card1"
+       aria-label="Crop Calendar">
+    </a>
 
+    <!-- Farming Tips -->
     <a href="farming-tips.html"
-       class="button tips"
-       aria-label="வேளாண்மை குறிப்புகள்"></a>
+       class="card card2"
+       aria-label="Farming Tips">
+    </a>
 
+    <!-- Farmer Loans -->
     <a href="loans.html"
-       class="button loans"
-       aria-label="விவசாயக் கடன் தகவல்கள்"></a>
+       class="card card3"
+       aria-label="Farmer Loan Information">
+    </a>
+
+    <div class="message" id="message">
+        பாக்ஸை கிளிக் செய்து அடுத்த பக்கத்திற்குச் செல்லுங்கள்
+    </div>
 
 </div>
+
+<script>
+function changeLanguage(language) {
+
+    const message = document.getElementById("message");
+
+    if (language === "en") {
+        document.documentElement.lang = "en";
+        message.textContent =
+        "Click a card to open the next page";
+    }
+
+    else {
+        document.documentElement.lang = "ta";
+        message.textContent =
+        "பாக்ஸை கிளிக் செய்து அடுத்த பக்கத்திற்குச் செல்லுங்கள்";
+    }
+}
+</script>
 
 </body>
 </html>
