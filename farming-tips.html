@@ -1,0 +1,662 @@
+
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aara Farmers - Farming Tips</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+ font-family:Arial,"Noto Sans Tamil",sans-serif;
+ color:#173c23;
+ background:#eaf5df;
+ overflow-x:hidden;
+}
+
+/* FARM BACKGROUND */
+.farm-background{
+ position:fixed;
+ inset:0;
+ z-index:-2;
+ overflow:hidden;
+ background:linear-gradient(#91d7f2 0%,#d8f3dc 48%,#79bd58 49%,#367d36 100%);
+}
+.sun{
+ position:absolute;
+ width:85px;height:85px;
+ border-radius:50%;
+ background:#ffe58a;
+ top:65px;right:12%;
+ box-shadow:0 0 55px #fff3a7;
+ animation:sunGlow 4s infinite alternate;
+}
+.cloud{
+ position:absolute;
+ width:130px;height:35px;
+ background:#ffffffd9;
+ border-radius:40px;
+ top:95px;left:-160px;
+ animation:cloudMove 35s linear infinite;
+}
+.cloud:before,.cloud:after{
+ content:"";position:absolute;background:white;border-radius:50%;
+}
+.cloud:before{width:50px;height:50px;top:-22px;left:20px}
+.cloud:after{width:65px;height:65px;top:-32px;right:18px}
+.cloud.two{top:170px;animation-duration:48s;animation-delay:-18s;transform:scale(.7)}
+.hill{
+ position:absolute;bottom:23%;width:120%;height:180px;
+ left:-10%;border-radius:50% 50% 0 0;
+ background:#75b957;
+}
+.hill.back{bottom:27%;background:#91c96c;transform:scaleX(1.2)}
+.field{
+ position:absolute;bottom:0;width:100%;height:30%;
+ background:linear-gradient(180deg,#559b42,#27632e);
+}
+.field-line{
+ position:absolute;bottom:-25px;width:130%;height:150px;
+ left:-15%;border-top:5px solid #a5d37b;
+ border-radius:50%;
+ transform:rotate(-7deg);
+}
+.field-line:nth-child(2){bottom:15px;transform:rotate(5deg)}
+.field-line:nth-child(3){bottom:55px;transform:rotate(-3deg)}
+.field-line:nth-child(4){bottom:95px;transform:rotate(7deg)}
+.farmer{
+ position:absolute;bottom:17%;left:8%;
+ font-size:70px;animation:farmerMove 4s ease-in-out infinite;
+}
+.tree{
+ position:absolute;bottom:24%;right:8%;
+ font-size:80px;animation:treeSway 5s ease-in-out infinite;
+}
+
+/* HEADER */
+header{
+ position:relative;
+ padding:25px 15px;
+ text-align:center;
+ color:white;
+ background:linear-gradient(120deg,#14532d,#238443dd);
+ box-shadow:0 5px 20px #153d1f55;
+}
+header h1{font-size:clamp(27px,5vw,42px);margin-bottom:8px}
+header p{font-size:15px}
+
+.nav{
+ display:flex;justify-content:space-between;
+ align-items:center;gap:12px;flex-wrap:wrap;
+ padding:13px 5%;
+ background:#ffffffed;
+}
+.nav a,.nav button{
+ border:0;text-decoration:none;
+ background:#206b37;color:white;
+ border-radius:25px;padding:10px 17px;
+ font-weight:bold;cursor:pointer;font-size:14px;
+}
+.nav button{background:#efa92d;color:#222}
+
+.heading{
+ text-align:center;padding:35px 15px 20px;
+}
+.heading h2{
+ font-size:clamp(25px,4vw,36px);
+ color:#155c2c;margin-bottom:12px;
+ text-shadow:0 2px 3px #fff;
+}
+.heading p{
+ max-width:720px;margin:auto;line-height:1.8;
+ color:#21452b;font-weight:600;
+}
+
+/* CARDS */
+.tips-grid{
+ max-width:1150px;
+ margin:25px auto 55px;
+ padding:0 18px;
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:25px;
+}
+.tip-card{
+ background:#ffffffed;
+ border:2px solid #ffffff;
+ border-radius:22px;
+ overflow:hidden;
+ box-shadow:0 10px 28px #173c2340;
+ cursor:pointer;
+ transition:transform .35s,box-shadow .35s;
+ animation:cardEnter .8s both;
+}
+.tip-card:nth-child(2){animation-delay:.15s}
+.tip-card:nth-child(3){animation-delay:.3s}
+.tip-card:nth-child(4){animation-delay:.45s}
+.tip-card:hover{
+ transform:translateY(-9px) scale(1.015);
+ box-shadow:0 17px 32px #173c2355;
+}
+.art{
+ height:205px;
+ position:relative;
+ overflow:hidden;
+ background:linear-gradient(#a8e4fa,#e4f7d9 65%,#7fbd52 66%);
+}
+.art svg{width:100%;height:100%;display:block}
+.card-info{padding:20px}
+.card-info .number{
+ display:inline-block;background:#e3f5df;
+ color:#216b37;border-radius:30px;
+ padding:5px 12px;font-size:12px;
+ font-weight:bold;margin-bottom:10px;
+}
+.card-info h3{font-size:21px;color:#155c2c;margin-bottom:9px}
+.card-info p{line-height:1.7;color:#4d6550;font-size:14px}
+.read{
+ display:inline-block;margin-top:15px;
+ background:#23753b;color:white;
+ padding:10px 17px;border-radius:25px;
+ font-weight:bold;font-size:13px;
+}
+
+/* DETAILS */
+.detail-panel{
+ display:none;
+ max-width:950px;
+ margin:0 auto 45px;
+ padding:0 18px;
+}
+.detail-panel.active{display:block;animation:openPanel .45s ease}
+.detail-inner{
+ background:#ffffffef;
+ border-radius:20px;
+ padding:22px;
+ box-shadow:0 10px 30px #173c2340;
+}
+.detail-top{
+ display:flex;align-items:center;
+ justify-content:space-between;gap:10px;
+ flex-wrap:wrap;margin-bottom:18px;
+}
+.detail-top h2{color:#155c2c;font-size:23px}
+.close-btn{
+ background:#b52c2c;color:white;border:0;
+ padding:10px 17px;border-radius:20px;
+ cursor:pointer;font-weight:bold;
+}
+.detail-image{
+ width:100%;height:210px;
+ border-radius:14px;overflow:hidden;
+ margin-bottom:18px;
+ background:#ccebc2;
+}
+.detail-image svg{width:100%;height:100%}
+.detail-inner h3{color:#23733a;margin:18px 0 8px}
+.detail-inner p,.detail-inner li{
+ line-height:1.85;color:#354d39;font-size:15px;
+}
+.detail-inner ul{padding-left:23px}
+.warning{
+ margin-top:18px;padding:13px;
+ background:#fff5d8;border-left:5px solid #e4a326;
+ border-radius:9px;line-height:1.7;font-size:14px;
+}
+footer{
+ text-align:center;padding:25px;
+ background:#164b2a;color:white;line-height:1.8;
+}
+
+@keyframes cloudMove{from{left:-170px}to{left:110%}}
+@keyframes sunGlow{from{transform:scale(.95)}to{transform:scale(1.08)}}
+@keyframes farmerMove{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes treeSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes cardEnter{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:translateY(0)}}
+@keyframes openPanel{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:700px){
+ .tips-grid{grid-template-columns:1fr;max-width:480px}
+ .art{height:190px}
+ .card-info h3{font-size:19px}
+ .farmer{font-size:48px;left:2%}
+ .tree{font-size:58px}
+ .nav{justify-content:center}
+}
+</style>
+</head>
+
+<body>
+
+<div class="farm-background">
+ <div class="sun"></div>
+ <div class="cloud"></div>
+ <div class="cloud two"></div>
+ <div class="hill back"></div>
+ <div class="hill"></div>
+ <div class="field">
+  <div class="field-line"></div>
+  <div class="field-line"></div>
+  <div class="field-line"></div>
+  <div class="field-line"></div>
+ </div>
+ <div class="farmer">👨‍🌾</div>
+ <div class="tree">🌳</div>
+</div>
+
+<header>
+ <h1>Aara Farmers 🌾</h1>
+ <p data-ta="விவசாயிகளுக்கான எளிய மற்றும் பயனுள்ள குறிப்புகள்"
+ data-en="Simple and useful tips for farmers">
+ விவசாயிகளுக்கான எளிய மற்றும் பயனுள்ள குறிப்புகள்
+ </p>
+</header>
+
+<div class="nav">
+ <a href="index.html" data-ta="← முகப்புப் பக்கம்" data-en="← Home">← முகப்புப் பக்கம்</a>
+ <button onclick="toggleLanguage()" id="langButton">English</button>
+</div>
+
+<section class="heading">
+ <h2 data-ta="🌱 விவசாயக் குறிப்புகள்"
+ data-en="🌱 Farming Tips">🌱 விவசாயக் குறிப்புகள்</h2>
+ <p data-ta="சிறிய பழக்கங்கள், நல்ல பயிர் பராமரிப்புக்கு உதவும். கீழே உள்ள நான்கு குறிப்புகளில் ஒன்றைத் தேர்ந்தெடுத்து முழு விளக்கத்தையும் படியுங்கள்."
+ data-en="Small habits can help improve crop care. Select one of the four tips below to read more.">
+ சிறிய பழக்கங்கள், நல்ல பயிர் பராமரிப்புக்கு உதவும். கீழே உள்ள நான்கு குறிப்புகளில் ஒன்றைத் தேர்ந்தெடுத்து முழு விளக்கத்தையும் படியுங்கள்.
+ </p>
+</section>
+
+<main>
+
+<div class="tips-grid">
+
+<!-- TIP 1 -->
+<div class="tip-card" onclick="showTip(1)">
+ <div class="art">
+ <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="420" cy="40" r="28" fill="#ffe58a"/>
+  <path d="M0 165 Q130 135 250 165 T500 160 V220 H0Z" fill="#65a84b"/>
+  <path d="M0 190 Q120 165 250 190 T500 185" fill="none" stroke="#397c35" stroke-width="7"/>
+  <path d="M100 160 Q110 100 130 70" stroke="#267c39" stroke-width="8" fill="none"/>
+  <path d="M130 110 Q75 65 65 105 Q90 140 130 110" fill="#40a94b"/>
+  <path d="M130 90 Q165 40 190 75 Q175 110 130 90" fill="#218a3b"/>
+  <path d="M130 155 Q200 105 240 150 Q190 180 130 155" fill="#4dbb53"/>
+  <path d="M270 65 Q330 65 345 115" fill="none" stroke="#2596db" stroke-width="12" stroke-linecap="round"/>
+  <path d="M345 115 Q365 140 385 115" fill="none" stroke="#2596db" stroke-width="9"/>
+  <g fill="#4bb8ef">
+   <path d="M355 130 Q345 148 355 153 Q365 148 355 130"/>
+   <path d="M382 135 Q372 153 382 158 Q392 153 382 135"/>
+   <path d="M330 140 Q320 158 330 163 Q340 158 330 140"/>
+  </g>
+  <path d="M0 205 Q100 195 200 205 T500 205" fill="none" stroke="#b8df83" stroke-width="5"/>
+  <g fill="#fff" opacity=".8">
+   <circle cx="60" cy="35" r="3"/><circle cx="230" cy="35" r="3"/>
+   <circle cx="300" cy="30" r="3"/>
+  </g>
+ </svg>
+ </div>
+ <div class="card-info">
+  <span class="number">TIP 01</span>
+  <h3 data-ta="💧 சரியான நேரத்தில் தண்ணீர்" data-en="💧 Water at the Right Time">💧 சரியான நேரத்தில் தண்ணீர்</h3>
+  <p data-ta="மண்ணின் ஈரப்பதத்தைப் பார்த்து தேவையான அளவு தண்ணீர் கொடுங்கள்."
+  data-en="Check soil moisture and water only as needed.">மண்ணின் ஈரப்பதத்தைப் பார்த்து தேவையான அளவு தண்ணீர் கொடுங்கள்.</p>
+  <span class="read" data-ta="விரிவாகப் பார்க்க →" data-en="Read More →">விரிவாகப் பார்க்க →</span>
+ </div>
+</div>
+
+<!-- TIP 2 -->
+<div class="tip-card" onclick="showTip(2)">
+ <div class="art">
+ <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+  <rect y="155" width="500" height="65" fill="#98633b"/>
+  <path d="M0 175 Q120 145 250 175 T500 170" fill="none" stroke="#c48a4f" stroke-width="15"/>
+  <g stroke="#e6c16b" stroke-width="8" stroke-linecap="round">
+   <path d="M30 165 l45 -22 M85 170 l38 -24 M145 166 l45 -24 M210 168 l40 -25 M280 170 l40 -22 M350 168 l40 -25 M420 170 l45 -23"/>
+  </g>
+  <g fill="#2f9447">
+   <path d="M250 160 Q220 100 180 115 Q200 155 250 160"/>
+   <path d="M250 160 Q270 90 315 105 Q300 150 250 160"/>
+   <path d="M250 160 Q250 80 270 50 Q290 110 250 160"/>
+  </g>
+  <path d="M250 160 V85" stroke="#237b39" stroke-width="8"/>
+  <circle cx="270" cy="50" r="8" fill="#8bd66c"/>
+  <g fill="#f6d66e">
+   <ellipse cx="100" cy="50" rx="17" ry="8" transform="rotate(-25 100 50)"/>
+   <ellipse cx="130" cy="75" rx="17" ry="8" transform="rotate(20 130 75)"/>
+   <ellipse cx="390" cy="60" rx="17" ry="8" transform="rotate(-20 390 60)"/>
+  </g>
+  <path d="M0 190 Q100 180 200 190 T500 190" stroke="#6d432a" stroke-width="3" fill="none"/>
+ </svg>
+ </div>
+ <div class="card-info">
+  <span class="number">TIP 02</span>
+  <h3 data-ta="🍂 மண்ணை மூடாக்கு செய்யுங்கள்" data-en="🍂 Use Organic Mulch">🍂 மண்ணை மூடாக்கு செய்யுங்கள்</h3>
+  <p data-ta="உலர்ந்த இலைகள் அல்லது வைக்கோலைப் பயன்படுத்தி மண்ணின் ஈரத்தைப் பாதுகாக்க உதவுங்கள்."
+  data-en="Use dry leaves or straw to help conserve soil moisture.">உலர்ந்த இலைகள் அல்லது வைக்கோலைப் பயன்படுத்தி மண்ணின் ஈரத்தைப் பாதுகாக்க உதவுங்கள்.</p>
+  <span class="read" data-ta="விரிவாகப் பார்க்க →" data-en="Read More →">விரிவாகப் பார்க்க →</span>
+ </div>
+</div>
+
+<!-- TIP 3 -->
+<div class="tip-card" onclick="showTip(3)">
+ <div class="art">
+ <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+  <rect y="160" width="500" height="60" fill="#8c603d"/>
+  <g stroke="#267a35" stroke-width="7" fill="none">
+   <path d="M90 165 Q90 120 80 85"/>
+   <path d="M190 165 Q185 115 205 75"/>
+   <path d="M340 165 Q335 110 355 90"/>
+   <path d="M420 165 Q420 125 400 105"/>
+  </g>
+  <g fill="#43a94d">
+   <ellipse cx="65" cy="105" rx="28" ry="12" transform="rotate(30 65 105)"/>
+   <ellipse cx="105" cy="120" rx="28" ry="12" transform="rotate(-25 105 120)"/>
+   <ellipse cx="180" cy="105" rx="28" ry="12" transform="rotate(25 180 105)"/>
+   <ellipse cx="220" cy="90" rx="28" ry="12" transform="rotate(-30 220 90)"/>
+   <ellipse cx="330" cy="115" rx="28" ry="12"/>
+   <ellipse cx="370" cy="110" rx="28" ry="12" transform="rotate(-30 370 110)"/>
+  </g>
+  <g stroke="#f4d46b" stroke-width="5" stroke-linecap="round">
+   <path d="M270 175 l-8 -45 M270 175 l10 -42"/>
+   <path d="M285 175 l-5 -32 M285 175 l15 -37"/>
+   <path d="M30 175 l-5 -35 M30 175 l13 -30"/>
+  </g>
+  <path d="M0 190 Q100 175 200 190 T500 190" stroke="#c18c54" stroke-width="8" fill="none"/>
+  <circle cx="270" cy="50" r="24" fill="#ffe58a"/>
+ </svg>
+ </div>
+ <div class="card-info">
+  <span class="number">TIP 03</span>
+  <h3 data-ta="🌿 களைகளை அகற்றுங்கள்" data-en="🌿 Remove Weeds">🌿 களைகளை அகற்றுங்கள்</h3>
+  <p data-ta="பயிருக்கு அருகில் வளரும் தேவையற்ற களைகளை கவனமாக அகற்றுங்கள்."
+  data-en="Carefully remove unwanted weeds growing near your crops.">பயிருக்கு அருகில் வளரும் தேவையற்ற களைகளை கவனமாக அகற்றுங்கள்.</p>
+  <span class="read" data-ta="விரிவாகப் பார்க்க →" data-en="Read More →">விரிவாகப் பார்க்க →</span>
+ </div>
+</div>
+
+<!-- TIP 4 -->
+<div class="tip-card" onclick="showTip(4)">
+ <div class="art">
+ <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+  <rect y="160" width="500" height="60" fill="#6c9d45"/>
+  <path d="M250 160 V65" stroke="#267d38" stroke-width="10"/>
+  <g fill="#3eaa4b">
+   <ellipse cx="210" cy="90" rx="55" ry="23" transform="rotate(25 210 90)"/>
+   <ellipse cx="290" cy="105" rx="55" ry="23" transform="rotate(-25 290 105)"/>
+   <ellipse cx="250" cy="55" rx="50" ry="22"/>
+  </g>
+  <g fill="#ffcf59">
+   <circle cx="250" cy="125" r="16"/>
+   <circle cx="180" cy="150" r="7"/>
+   <circle cx="320" cy="145" r="7"/>
+  </g>
+  <g fill="#4a3420">
+   <ellipse cx="355" cy="65" rx="10" ry="6"/>
+   <ellipse cx="370" cy="58" rx="10" ry="6"/>
+   <circle cx="362" cy="53" r="5"/>
+  </g>
+  <g stroke="#4b9c4a" stroke-width="5" fill="none">
+   <path d="M70 170 Q80 120 90 100"/>
+   <path d="M110 170 Q120 130 135 115"/>
+   <path d="M400 170 Q390 120 375 105"/>
+  </g>
+  <path d="M0 195 Q120 180 250 195 T500 195" fill="none" stroke="#b9dc76" stroke-width="6"/>
+ </svg>
+ </div>
+ <div class="card-info">
+  <span class="number">TIP 04</span>
+  <h3 data-ta="🔍 செடிகளைத் தொடர்ந்து கவனியுங்கள்" data-en="🔍 Inspect Your Plants Regularly">🔍 செடிகளைத் தொடர்ந்து கவனியுங்கள்</h3>
+  <p data-ta="இலைகள், தண்டுகள் மற்றும் செடிகளின் வளர்ச்சியில் மாற்றங்கள் உள்ளதா என்று பாருங்கள்."
+  data-en="Look for changes in leaves, stems and plant growth.">இலைகள், தண்டுகள் மற்றும் செடிகளின் வளர்ச்சியில் மாற்றங்கள் உள்ளதா என்று பாருங்கள்.</p>
+  <span class="read" data-ta="விரிவாகப் பார்க்க →" data-en="Read More →">விரிவாகப் பார்க்க →</span>
+ </div>
+</div>
+
+</div>
+
+<!-- DETAILS PANEL -->
+<section class="detail-panel" id="detailPanel">
+ <div class="detail-inner">
+  <div class="detail-top">
+   <h2 id="detailTitle">விவசாயக் குறிப்பு</h2>
+   <button class="close-btn" onclick="closeTip()" data-ta="✕ மூடு" data-en="✕ Close">✕ மூடு</button>
+  </div>
+  <div class="detail-image" id="detailImage"></div>
+  <div id="detailContent"></div>
+ </div>
+</section>
+
+</main>
+
+<footer>
+ <h3>Aara Farmers 🌾</h3>
+ <p data-ta="விவசாயிகளுக்கு உதவும் எளிய தகவல் தளம்"
+ data-en="Simple information platform for farmers">
+ விவசாயிகளுக்கு உதவும் எளிய தகவல் தளம்
+ </p>
+ <p>© 2026 Aara Farmers. All Rights Reserved.</p>
+</footer>
+
+<script>
+let currentLanguage="ta";
+
+const tips={
+1:{
+ titleTa:"💧 சரியான நேரத்தில் தண்ணீர் கொடுப்பது",
+ titleEn:"💧 Watering Your Plants Properly",
+ image:`<svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg">
+ <rect width="600" height="230" fill="#c8effb"/>
+ <circle cx="500" cy="45" r="30" fill="#ffdc70"/>
+ <rect y="165" width="600" height="65" fill="#94633e"/>
+ <path d="M270 170 V65" stroke="#27833b" stroke-width="12"/>
+ <path d="M270 110 Q190 40 145 100 Q190 145 270 110" fill="#3ba84c"/>
+ <path d="M270 95 Q330 20 395 80 Q350 130 270 95" fill="#278d3b"/>
+ <path d="M80 65 Q150 65 165 125" fill="none" stroke="#2998da" stroke-width="13" stroke-linecap="round"/>
+ <g fill="#38a9e7"><path d="M165 130 Q150 155 165 162 Q180 155 165 130"/><path d="M190 140 Q175 165 190 172 Q205 165 190 140"/></g>
+ <path d="M0 195 Q120 180 250 195 T600 195" fill="none" stroke="#d5a26a" stroke-width="7"/>
+ </svg>`,
+ contentTa:`
+ <h3>எப்படி செய்ய வேண்டும்?</h3>
+ <ul>
+ <li>தண்ணீர் ஊற்றுவதற்கு முன் விரலால் மண்ணின் மேற்பரப்பை மட்டும் அல்லாமல், சிறிது ஆழத்திலும் ஈரப்பதம் உள்ளதா என்று பாருங்கள்.</li>
+ <li>மண் உலர்ந்திருந்தால் பயிரின் தேவைக்கேற்ப தண்ணீர் கொடுங்கள்.</li>
+ <li>காலை நேரத்தில் நீர் பாய்ச்சுவது பல தோட்டப் பயிர்களுக்கு உதவியாக இருக்கும்; மாலை நேரமும் சில சூழல்களில் ஏற்றதாக இருக்கலாம்.</li>
+ <li>செடியின் அடிப்பகுதியில் மெதுவாக நீர் கொடுங்கள். இலைகளைத் தொடர்ந்து நனைப்பதைத் தவிர்க்கலாம்.</li>
+ </ul>
+ <h3>கவனிக்க வேண்டியது</h3>
+ <p>அதிக தண்ணீர் கொடுத்தால் வேர்ப்பகுதியில் காற்றோட்டம் குறைந்து வேர் அழுகல் ஏற்படலாம். மண் வகை, வானிலை, பயிர் வளர்ச்சி நிலை ஆகியவற்றைப் பொறுத்து நீர்ப்பாசனத்தை மாற்றுங்கள்.</p>
+ <div class="warning">⚠️ எல்லாப் பயிர்களுக்கும் ஒரே நேரம் அல்லது ஒரே அளவு தண்ணீர் பொருந்தாது. பயிர் சார்ந்த பரிந்துரையைப் பின்பற்றுங்கள்.</div>
+ `,
+ contentEn:`
+ <h3>How to do it</h3>
+ <ul>
+ <li>Before watering, check soil moisture slightly below the surface.</li>
+ <li>If the soil is dry, water according to the crop's needs.</li>
+ <li>Morning watering is useful for many garden crops; evening may also suit some conditions.</li>
+ <li>Water gently near the base of the plant.</li>
+ </ul>
+ <h3>Important</h3>
+ <p>Excess water can reduce oxygen around roots and cause root problems. Adjust irrigation according to soil type, weather and crop stage.</p>
+ <div class="warning">⚠️ One watering time or quantity does not suit every crop.</div>
+ `
+},
+2:{
+ titleTa:"🍂 மண்ணை மூடாக்கு செய்வது",
+ titleEn:"🍂 Applying Organic Mulch",
+ image:`<svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg">
+ <rect width="600" height="230" fill="#d8f2f9"/>
+ <rect y="150" width="600" height="80" fill="#98633c"/>
+ <path d="M0 160 Q100 130 200 160 T400 160 T600 160" stroke="#d8b16a" stroke-width="18" fill="none"/>
+ <path d="M300 160 V55" stroke="#287d37" stroke-width="11"/>
+ <path d="M300 110 Q230 40 180 95 Q230 145 300 110" fill="#42a94c"/>
+ <path d="M300 95 Q360 35 420 80 Q380 130 300 95" fill="#2c923e"/>
+ <g stroke="#e5c46d" stroke-width="8" stroke-linecap="round"><path d="M30 155 l50 -25 M100 160 l40 -25 M440 155 l45 -25 M520 160 l45 -25"/></g>
+ </svg>`,
+ contentTa:`
+ <h3>மூடாக்கு என்றால் என்ன?</h3>
+ <p>செடியைச் சுற்றியுள்ள மண்ணின் மேற்பரப்பில் வைக்கோல், உலர்ந்த இலைகள் அல்லது பாதுகாப்பான தாவரக் கழிவுகளைப் பரப்புவதே மூடாக்கு.</p>
+ <h3>எப்படி செய்யலாம்?</h3>
+ <ul>
+ <li>நோய் தாக்காத உலர்ந்த இலைகள் அல்லது சுத்தமான வைக்கோலைத் தேர்வு செய்யுங்கள்.</li>
+ <li>செடியின் வேர்த்தண்டை நேரடியாக மூடாமல், அதைச் சுற்றி மண்ணின் மேல் பரப்புங்கள்.</li>
+ <li>மழை மற்றும் மண் ஈரப்பதத்தைப் பொறுத்து மூடாக்கின் அளவைச் சரிசெய்யுங்கள்.</li>
+ <li>அழுகல், பூஞ்சை அல்லது பூச்சி பாதிப்பு இருக்கிறதா என்று பாருங்கள்.</li>
+ </ul>
+ <h3>இதன் பயன்</h3>
+ <p>மண்ணிலிருந்து நீர் ஆவியாகும் இழப்பைக் குறைக்கவும், களைகளைக் கட்டுப்படுத்தவும், மண்ணின் வெப்பநிலையைச் சீராக்கவும் உதவலாம்.</p>
+ <div class="warning">⚠️ மிகத் தடிமனாக மூடாக்கு போடாதீர்கள். நோய் பாதித்த தாவரக் கழிவுகளைப் பயன்படுத்த வேண்டாம்.</div>
+ `,
+ contentEn:`
+ <h3>What is mulch?</h3>
+ <p>Mulching means covering the soil surface around plants with straw, dry leaves or safe plant residues.</p>
+ <h3>How to do it</h3>
+ <ul>
+ <li>Choose clean straw or dry leaves without disease.</li>
+ <li>Spread material over the soil, keeping it away from direct contact with the stem.</li>
+ <li>Adjust the amount based on rainfall and soil moisture.</li>
+ <li>Check for rot, fungal growth or pests.</li>
+ </ul>
+ <h3>Benefits</h3>
+ <p>Mulch can reduce water loss from soil, suppress weeds and moderate soil temperature.</p>
+ <div class="warning">⚠️ Avoid excessively thick mulch and diseased plant material.</div>
+ `
+},
+3:{
+ titleTa:"🌿 களைகளை அகற்றுவது",
+ titleEn:"🌿 Managing Weeds",
+ image:`<svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg">
+ <rect width="600" height="230" fill="#d8f2fa"/>
+ <rect y="165" width="600" height="65" fill="#98653e"/>
+ <g stroke="#2a7e39" stroke-width="9" fill="none">
+ <path d="M150 170 Q145 95 120 55"/><path d="M300 170 Q305 100 335 50"/><path d="M470 170 Q460 100 440 65"/>
+ </g>
+ <g fill="#3ca64b">
+ <ellipse cx="100" cy="75" rx="40" ry="18" transform="rotate(30 100 75)"/>
+ <ellipse cx="150" cy="105" rx="40" ry="18" transform="rotate(-30 150 105)"/>
+ <ellipse cx="330" cy="75" rx="40" ry="18"/>
+ <ellipse cx="365" cy="110" rx="40" ry="18" transform="rotate(-30 365 110)"/>
+ </g>
+ <g stroke="#e8d17c" stroke-width="6" fill="none"><path d="M40 175 l-10 -50 M40 175 l20 -45 M540 175 l-10 -55 M540 175 l20 -35"/></g>
+ </svg>`,
+ contentTa:`
+ <h3>களைகளை ஏன் அகற்ற வேண்டும்?</h3>
+ <p>களைகள் பயிருடன் நீர், ஒளி மற்றும் ஊட்டச்சத்துக்குப் போட்டியிடலாம். சில களைகள் பூச்சிகளுக்கும் நோய்களுக்கும் தங்குமிடமாக இருக்கலாம்.</p>
+ <h3>எளிய பராமரிப்பு முறை</h3>
+ <ul>
+ <li>வயலை அடிக்கடி சுற்றிப் பார்த்து களைகள் சிறியதாக இருக்கும்போதே அடையாளம் காணுங்கள்.</li>
+ <li>பயிரின் வேர்களைச் சேதப்படுத்தாமல் கையால் அல்லது பொருத்தமான கருவியால் அகற்றுங்கள்.</li>
+ <li>களைகளை அகற்றிய பிறகு வயலில் விதைகள் பரவாமல் கவனமாக வெளியேற்றுங்கள்.</li>
+ <li>பயிரின் ஆரம்ப வளர்ச்சிக் கட்டத்தில் களைகளை கட்டுப்படுத்துவது முக்கியம்.</li>
+ </ul>
+ <h3>கவனம்</h3>
+ <p>எந்தக் களையை அகற்ற வேண்டும் என்பது பயிர் மற்றும் வயல் சூழலைப் பொறுத்தது. தெரியாத களைகளுக்கு ரசாயன மருந்து பயன்படுத்துவதற்கு முன் வேளாண் அலுவலரிடம் ஆலோசனை பெறுங்கள்.</p>
+ <div class="warning">⚠️ பயிரின் வேர்களை வெட்டும் அளவுக்கு ஆழமாக மண்வெட்டி பயன்படுத்த வேண்டாம்.</div>
+ `,
+ contentEn:`
+ <h3>Why remove weeds?</h3>
+ <p>Weeds can compete with crops for water, light and nutrients. Some may also harbour pests and diseases.</p>
+ <h3>Simple care steps</h3>
+ <ul>
+ <li>Inspect the field regularly and identify weeds while they are small.</li>
+ <li>Remove them by hand or with a suitable tool without damaging crop roots.</li>
+ <li>Dispose of weeds carefully to avoid spreading seeds.</li>
+ <li>Early crop growth is an important period for weed control.</li>
+ </ul>
+ <h3>Take care</h3>
+ <p>Weed management depends on the crop and field conditions. Ask an agricultural officer before using herbicides if you are unsure.</p>
+ <div class="warning">⚠️ Avoid digging so deeply that crop roots are damaged.</div>
+ `
+},
+4:{
+ titleTa:"🔍 செடிகளைத் தொடர்ந்து கவனிப்பது",
+ titleEn:"🔍 Regular Plant Inspection",
+ image:`<svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg">
+ <rect width="600" height="230" fill="#cdeefa"/>
+ <circle cx="500" cy="40" r="25" fill="#ffe17d"/>
+ <rect y="165" width="600" height="65" fill="#8c633e"/>
+ <path d="M290 170 V60" stroke="#267c38" stroke-width="12"/>
+ <path d="M290 115 Q210 35 160 90 Q210 145 290 115" fill="#42a94c"/>
+ <path d="M290 90 Q365 20 430 75 Q370 130 290 90" fill="#2c913e"/>
+ <circle cx="220" cy="105" r="9" fill="#f3c54d"/>
+ <circle cx="390" cy="80" r="8" fill="#f3c54d"/>
+ <circle cx="350" cy="125" r="7" fill="#e9a34a"/>
+ <circle cx="470" cy="135" r="6" fill="#d17a42"/>
+ <path d="M60 60 L110 110 M110 60 L60 110" stroke="#268bc0" stroke-width="8" stroke-linecap="round"/>
+ <circle cx="85" cy="85" r="38" fill="none" stroke="#268bc0" stroke-width="7"/>
+ </svg>`,
+ contentTa:`
+ <h3>எதைப் பார்க்க வேண்டும்?</h3>
+ <ul>
+ <li>இலைகளில் மஞ்சள் நிறம், புள்ளிகள் அல்லது சுருண்ட தோற்றம் உள்ளதா?</li>
+ <li>இலைகளின் அடிப்பகுதியில் சிறிய பூச்சிகள் அல்லது முட்டைகள் உள்ளனவா?</li>
+ <li>தண்டில் காயம், அழுகல் அல்லது துளைகள் உள்ளனவா?</li>
+ <li>சில செடிகள் மட்டும் வளர்ச்சி குறைந்து காணப்படுகின்றனவா?</li>
+ </ul>
+ <h3>எவ்வளவு அடிக்கடி?</h3>
+ <p>வாரந்தோறும் வயலின் பல பகுதிகளில் சில செடிகளைத் தேர்ந்தெடுத்து கவனியுங்கள். பூச்சி அல்லது நோய் அறிகுறி தென்பட்டால் அதன் படத்தை எடுத்து, பாதிப்பு எந்த அளவுக்கு உள்ளது என்று பதிவு செய்யுங்கள்.</p>
+ <h3>அடுத்து என்ன செய்யலாம்?</h3>
+ <p>பாதிக்கப்பட்ட செடியின் படத்தையும் பயிர் பெயர், வயது, அறிகுறிகள் போன்ற விவரங்களையும் அருகிலுள்ள வேளாண்மை அலுவலர் அல்லது தாவர நோயியல் நிபுணரிடம் காட்டுங்கள்.</p>
+ <div class="warning">⚠️ அறிகுறியை மட்டும் பார்த்து நோயை உறுதிப்படுத்த முடியாது. உறுதிப்படுத்தாமல் பூச்சிக்கொல்லி அல்லது பூஞ்சைக்கொல்லி தெளிக்க வேண்டாம்.</div>
+ `,
+ contentEn:`
+ <h3>What should you inspect?</h3>
+ <ul>
+ <li>Yellowing, spots or curling on leaves.</li>
+ <li>Small insects or eggs under leaves.</li>
+ <li>Injuries, rot or holes on stems.</li>
+ <li>Plants that appear weaker than others.</li>
+ </ul>
+ <h3>How often?</h3>
+ <p>Inspect sample plants from different parts of the field every week. If you see symptoms, take photographs and record how widespread the problem is.</p>
+ <h3>What next?</h3>
+ <p>Show the crop name, age, symptoms and photographs to a local agriculture officer or plant-health expert.</p>
+ <div class="warning">⚠️ Symptoms alone may not confirm a disease. Do not spray pesticides or fungicides without proper identification.</div>
+ `
+}
+};
+
+function showTip(number){
+ const tip=tips[number];
+ document.getElementById("detailTitle").textContent=
+ currentLanguage==="ta"?tip.titleTa:tip.titleEn;
+ document.getElementById("detailImage").innerHTML=tip.image;
+ document.getElementById("detailContent").innerHTML=
+ currentLanguage==="ta"?tip.contentTa:tip.contentEn;
+
+ const panel=document.getElementById("detailPanel");
+ panel.classList.add("active");
+ panel.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function closeTip(){
+ document.getElementById("detailPanel").classList.remove("active");
+}
+
+function toggleLanguage(){
+ currentLanguage=currentLanguage==="ta"?"en":"ta";
+
+ document.querySelectorAll("[data-ta][data-en]").forEach(element=>{
+  element.textContent=element.getAttribute(
+   currentLanguage==="ta"?"data-ta":"data-en"
+  );
+ });
+
+ document.documentElement.lang=currentLanguage;
+ document.getElementById("langButton").textContent=
+ currentLanguage==="ta"?"English":"தமிழ்";
+
+ const active=document.getElementById("detailPanel");
+ if(active.classList.contains("active")){
+  const title=document.getElementById("detailTitle").textContent;
+  const number=Object.keys(tips).find(key=>
+   tips[key].titleTa===title || tips[key].titleEn===title
+  );
+  if(number)showTip(Number(number));
+ }
+}
+</script>
+
+</body>
+</html>
