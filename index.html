@@ -1,63 +1,100 @@
+
 <!DOCTYPE html>
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aaraa Farmers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aara Farmers</title>
+
 <style>
-  * { box-sizing: border-box; }
-  body {
+* {
     margin: 0;
-    font-family: 'Noto Sans Tamil', Arial, sans-serif;
-    background: linear-gradient(#c8f0b0, #7ccf5a);
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
     min-height: 100vh;
-    border: 14px solid #2e7d32;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.home {
     position: relative;
-  }
-  .grass { position: fixed; font-size: 40px; }
-  .tl { top: 0; left: 0; } .tr { top: 0; right: 0; }
-  .bl { bottom: 0; left: 0; } .br { bottom: 0; right: 0; }
-  header { text-align: center; padding: 30px 10px 10px; }
-  header h1 { margin: 0; font-size: 48px; color: #1b5e20; text-shadow: 2px 2px #e8ffd8; }
-  header p { margin: 6px 0 0; font-size: 20px; color: #33691e; }
-  .boxes {
-    display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 30px; padding: 30px;
-  }
-  .box {
-    width: 250px; height: 220px;
-    background: #a1662f; border: 6px solid #5d3a12; border-radius: 14px;
-    text-decoration: none; color: white; text-align: center;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    box-shadow: 0 8px 0 #5d3a12; transition: transform 0.2s;
-  }
-  .box:hover { transform: translateY(-6px); }
-  .box .icon { font-size: 70px; }
-  .box .name { font-size: 26px; font-weight: bold; margin-top: 10px; }
+    width: 100%;
+    max-width: 1100px;
+    aspect-ratio: 522 / 270;
+}
+
+.home img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* முழு பாக்ஸையும் கிளிக் செய்யலாம் */
+
+.button {
+    position: absolute;
+    display: block;
+    cursor: pointer;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Calendar */
+.calendar {
+    left: 8.3%;
+    top: 45.5%;
+    width: 27.5%;
+    height: 41%;
+}
+
+/* Farming Tips */
+.tips {
+    left: 36.8%;
+    top: 45.5%;
+    width: 26%;
+    height: 41%;
+}
+
+/* Loans */
+.loans {
+    left: 63.7%;
+    top: 45.5%;
+    width: 26.5%;
+    height: 41%;
+}
+
+.button:focus-visible {
+    outline: 3px solid white;
+}
 </style>
 </head>
+
 <body>
-  <div class="grass tl">🌿🌾</div><div class="grass tr">🌾🌿</div>
-  <div class="grass bl">🌱🍃</div><div class="grass br">🍃🌱</div>
 
-  <header>
-    <h1>🌾 Aaraa Farmers 🌾</h1>
-    <p>விவசாயிகளுக்கான எங்கள் இணையதளம்</p>
-  </header>
+<div class="home">
 
-  <div class="boxes">
-    <a class="box" href="calendar.html">
-      <div class="icon">📅</div>
-      <div class="name">பயிர் நாட்காட்டி</div>
-    </a>
-    <a class="box" href="tips.html">
-      <div class="icon">🌱</div>
-      <div class="name">விவசாய குறிப்புகள்</div>
-    </a>
-    <a class="box" href="loans.html">
-      <div class="icon">🚜</div>
-      <div class="name">கடன் திட்டங்கள்</div>
-    </a>
-  </div>
+    <img src="aara-farmers-home.png"
+         alt="Aara Farmers Home Page">
+
+    <a href="crop-calendar.html"
+       class="button calendar"
+       aria-label="பயிர் நாட்காட்டி"></a>
+
+    <a href="farming-tips.html"
+       class="button tips"
+       aria-label="வேளாண்மை குறிப்புகள்"></a>
+
+    <a href="loans.html"
+       class="button loans"
+       aria-label="விவசாயக் கடன் தகவல்கள்"></a>
+
+</div>
+
 </body>
 </html>
