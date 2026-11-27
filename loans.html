@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ta">
 <head>
@@ -6,222 +7,91 @@
 <title>Aara Farmers - Loan Information</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ font-family:Arial,"Noto Sans Tamil",sans-serif;
+ background:linear-gradient(135deg,#e8f5e9,#f1f8e9,#dcedc8);
+ color:#203323;min-height:100vh;
 }
-
-body {
-    font-family: Arial, sans-serif;
-    background: #eef7e9;
-    color: #24452b;
+header{
+ background:linear-gradient(120deg,#14532d,#238443,#4caf50);
+ color:white;text-align:center;padding:30px 15px;
+ box-shadow:0 4px 15px #0002;
+ animation:appear 1s ease;
 }
-
-header {
-    background: linear-gradient(120deg, #14532d, #43a047);
-    color: white;
-    text-align: center;
-    padding: 28px 12px;
+header h1{font-size:clamp(28px,5vw,42px);margin-bottom:8px}
+header p{font-size:16px}
+.topbar{
+ display:flex;justify-content:space-between;align-items:center;
+ gap:10px;flex-wrap:wrap;padding:12px 5%;
+ background:#ffffffdd;
 }
-
-header h1 {
-    font-size: 32px;
-    margin-bottom: 8px;
+.topbar a,.topbar button{
+ text-decoration:none;border:0;border-radius:25px;
+ padding:10px 17px;font-weight:bold;cursor:pointer;
+ background:#216b37;color:white;font-size:14px;
 }
-
-nav {
-    background: white;
-    padding: 13px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.topbar button{background:#f0a629;color:#222}
+.container{max-width:1050px;margin:28px auto;padding:0 15px}
+.intro{text-align:center;margin:20px 0 28px}
+.intro h2{color:#17652e;font-size:clamp(23px,4vw,32px);margin-bottom:10px}
+.intro p{line-height:1.8;color:#526454}
+.notice{
+ background:#fff8df;border-left:5px solid #e5a000;
+ padding:15px;border-radius:10px;margin:20px 0;
+ line-height:1.8;font-size:14px;
 }
-
-nav a {
-    color: #17652e;
-    text-decoration: none;
-    font-weight: bold;
+.loan-card{
+ background:white;border-radius:16px;margin:15px 0;
+ box-shadow:0 5px 16px #1b5e2020;
+ overflow:hidden;border:1px solid #d8ead8;
+ transition:transform .25s,box-shadow .25s;
+ animation:rise .6s ease both;
 }
-
-.lang-btn {
-    background: #17652e;
-    color: white;
-    border: none;
-    padding: 10px 17px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
+.loan-card:hover{transform:translateY(-3px);box-shadow:0 9px 22px #1b5e2030}
+.loan-card summary{
+ list-style:none;cursor:pointer;padding:20px;
+ display:flex;align-items:center;gap:13px;
+ color:#185b2d;font-size:18px;font-weight:bold;
 }
-
-.intro {
-    text-align: center;
-    padding: 30px 15px 15px;
+.loan-card summary::-webkit-details-marker{display:none}
+.loan-card summary:after{
+ content:"＋";margin-left:auto;font-size:25px;color:#269447;
 }
-
-.intro h2 {
-    color: #17652e;
-    font-size: 26px;
-    margin-bottom: 10px;
+.loan-card[open] summary:after{content:"−"}
+.loan-icon{font-size:30px}
+.details{
+ padding:0 20px 22px;line-height:1.85;
+ border-top:1px solid #e5eee5;
 }
-
-.intro p {
-    line-height: 1.6;
-    color: #526b55;
+.details h3{color:#1b7135;margin:18px 0 5px;font-size:16px}
+.details p{margin:5px 0}
+.details ul{padding-left:23px}
+.tag{
+ display:inline-block;background:#e8f5e9;color:#216b37;
+ padding:5px 10px;border-radius:20px;font-size:12px;
+ margin:4px 4px 4px 0;font-weight:bold;
 }
-
-.container {
-    max-width: 950px;
-    margin: auto;
-    padding: 10px 15px 40px;
+.info{
+ background:#f2f8f1;border-radius:10px;padding:12px;
+ margin-top:10px;font-size:14px;
 }
-
-.loan-card {
-    background: white;
-    margin: 22px 0;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 5px 17px #00000015;
-    border: 1px solid #dcebd8;
-    transition: 0.25s;
+.apply{
+ display:inline-block;margin-top:12px;padding:10px 15px;
+ background:#24763a;color:white;text-decoration:none;
+ border-radius:8px;font-weight:bold;
 }
-
-.loan-card:hover {
-    transform: translateY(-3px);
+.apply:hover{background:#14532d}
+footer{
+ text-align:center;padding:25px 12px;background:#164b2a;
+ color:white;margin-top:40px;line-height:1.8;
 }
-
-.poster {
-    min-height: 150px;
-    padding: 22px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    color: white;
-    background: linear-gradient(110deg, #17652e, #65a94e);
-}
-
-.loan-card:nth-child(2) .poster {
-    background: linear-gradient(110deg, #80501c, #c18a3c);
-}
-
-.loan-card:nth-child(3) .poster {
-    background: linear-gradient(110deg, #315b83, #5d9ac4);
-}
-
-.loan-card:nth-child(4) .poster {
-    background: linear-gradient(110deg, #496c32, #91ad4c);
-}
-
-.loan-card:nth-child(5) .poster {
-    background: linear-gradient(110deg, #72522f, #b58a52);
-}
-
-.loan-card:nth-child(6) .poster {
-    background: linear-gradient(110deg, #276a62, #58a99a);
-}
-
-.loan-card:nth-child(7) .poster {
-    background: linear-gradient(110deg, #654a86, #9b7cba);
-}
-
-.loan-card:nth-child(8) .poster {
-    background: linear-gradient(110deg, #9b5c25, #d39a4e);
-}
-
-.loan-card:nth-child(9) .poster {
-    background: linear-gradient(110deg, #286d42, #6da96d);
-}
-
-.loan-card:nth-child(10) .poster {
-    background: linear-gradient(110deg, #315c48, #70a77a);
-}
-
-.emoji {
-    font-size: 60px;
-    min-width: 80px;
-    text-align: center;
-}
-
-.poster h3 {
-    font-size: 22px;
-    margin-bottom: 8px;
-}
-
-.poster p {
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.loan-content {
-    padding: 18px 22px;
-}
-
-.loan-content summary {
-    color: #17652e;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    list-style-position: inside;
-}
-
-.details {
-    padding-top: 15px;
-    line-height: 1.8;
-    color: #344d38;
-}
-
-.details h4 {
-    color: #17652e;
-    margin: 12px 0 4px;
-}
-
-.details ul {
-    padding-left: 22px;
-}
-
-.notice {
-    background: #fff7df;
-    border-left: 5px solid #e2a629;
-    border-radius: 7px;
-    padding: 13px;
-    margin-top: 14px;
-    font-size: 14px;
-}
-
-footer {
-    background: #14532d;
-    color: white;
-    text-align: center;
-    padding: 22px 12px;
-    line-height: 1.8;
-}
-
-@media(max-width:600px) {
-    header h1 {
-        font-size: 26px;
-    }
-
-    .poster {
-        padding: 17px 12px;
-        gap: 10px;
-    }
-
-    .emoji {
-        font-size: 45px;
-        min-width: 55px;
-    }
-
-    .poster h3 {
-        font-size: 18px;
-    }
-
-    .poster p {
-        font-size: 13px;
-    }
-
-    .loan-content {
-        padding: 16px;
-    }
+@keyframes appear{from{opacity:0}to{opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){
+ .loan-card summary{font-size:16px;padding:16px}
+ .details{padding:0 15px 18px}
+ .topbar{justify-content:center}
 }
 </style>
 </head>
@@ -229,390 +99,495 @@ footer {
 <body>
 
 <header>
-    <h1>Aara Farmers 🌾</h1>
-    <p id="subtitle">விவசாயிகளுக்கான கடன் தகவல்கள்</p>
+ <h1>Aara Farmers 🌾</h1>
+ <p data-ta="விவசாயிகளுக்கான கடன் மற்றும் அரசு திட்டத் தகவல்கள்"
+ data-en="Loan and Government Scheme Information for Farmers">
+ விவசாயிகளுக்கான கடன் மற்றும் அரசு திட்டத் தகவல்கள்
+ </p>
 </header>
 
-<nav>
-    <a href="index.html" id="back">⬅ முகப்புக்குச் செல்ல</a>
-    <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">
-        English
-    </button>
-</nav>
-
-<section class="intro">
-    <h2 id="mainTitle">விவசாயக் கடன் திட்டங்கள்</h2>
-    <p id="introText">
-        உங்களுக்குத் தேவையான கடன் வகையைத் தேர்ந்தெடுத்து
-        அதன் விவரங்களைத் தெரிந்துகொள்ளுங்கள்.
-    </p>
-</section>
+<div class="topbar">
+ <a href="index.html" data-ta="← முகப்புப் பக்கம்" data-en="← Home">← முகப்புப் பக்கம்</a>
+ <button onclick="toggleLanguage()" id="langButton">English</button>
+</div>
 
 <main class="container">
 
-<!-- 1. மாடு வாங்கும் கடன் -->
-<div class="loan-card">
-    <div class="poster">
-        <div class="emoji">🐄</div>
-        <div>
-            <h3 data-ta="மாடு வாங்கும் கடன்" data-en="Dairy Cow Purchase Loan">மாடு வாங்கும் கடன்</h3>
-            <p data-ta="பால் பண்ணை மற்றும் கால்நடை வளர்ப்புக்கான நிதி உதவி"
-               data-en="Financial support for dairy farming">
-               பால் பண்ணை மற்றும் கால்நடை வளர்ப்புக்கான நிதி உதவி
-            </p>
-        </div>
-    </div>
-    <div class="loan-content">
-        <details>
-            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
-            <div class="details">
-                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
-                <p data-ta="பால் தரும் மாடு அல்லது எருமை வாங்கி பால் பண்ணை தொடங்க அல்லது விரிவுபடுத்த."
-                   data-en="To purchase milch cows or buffaloes and start or expand a dairy farm."></p>
-                <h4 data-ta="யார் விண்ணப்பிக்கலாம்?" data-en="Eligibility">யார் விண்ணப்பிக்கலாம்?</h4>
-                <p data-ta="கால்நடை வளர்க்க இடம், பராமரிப்பு வசதி மற்றும் வங்கியின் தகுதி நிபந்தனைகளைப் பூர்த்தி செய்பவர்கள்."
-                   data-en="Applicants who have suitable space and meet bank eligibility conditions."></p>
-                <h4 data-ta="தேவையான ஆவணங்கள்" data-en="Documents">தேவையான ஆவணங்கள்</h4>
-                <ul>
-                    <li data-ta="ஆதார் அட்டை" data-en="Aadhaar card">ஆதார் அட்டை</li>
-                    <li data-ta="முகவரிச் சான்று" data-en="Address proof">முகவரிச் சான்று</li>
-                    <li data-ta="வங்கிக் கணக்கு விவரம்" data-en="Bank account details">வங்கிக் கணக்கு விவரம்</li>
-                    <li data-ta="கால்நடை வளர்ப்புத் திட்ட விவரம்" data-en="Dairy project details">கால்நடை வளர்ப்புத் திட்ட விவரம்</li>
-                </ul>
-            </div>
-        </details>
-    </div>
-</div>
-
-<!-- 2. ஆடு வளர்ப்புக் கடன் -->
-<div class="loan-card">
-    <div class="poster">
-        <div class="emoji">🐐</div>
-        <div>
-            <h3 data-ta="ஆடு மற்றும் செம்மறியாடு கடன்" data-en="Goat and Sheep Loan">ஆடு மற்றும் செம்மறியாடு கடன்</h3>
-            <p data-ta="ஆடு வளர்ப்புப் பண்ணை தொடங்குவதற்கான நிதி உதவி"
-               data-en="Financial support to start a goat or sheep farm"></p>
-        </div>
-    </div>
-    <div class="loan-content">
-        <details>
-            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
-            <div class="details">
-                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
-                <p data-ta="ஆடுகள் வாங்குதல், கொட்டகை அமைத்தல் மற்றும் தீவனச் செலவுகளுக்கு."
-                   data-en="For purchasing goats, building sheds and feed expenses."></p>
-                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
-                <p data-ta="ஆடு வளர்க்க இடவசதி மற்றும் பராமரிப்பு ஏற்பாடுகள் கொண்டவர்கள்."
-                   data-en="Applicants with suitable space and facilities to rear goats."></p>
-                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
-                <ul>
-                    <li data-ta="ஆதார் மற்றும் முகவரிச் சான்று" data-en="Aadhaar and address proof"></li>
-                    <li data-ta="வங்கிக் கணக்கு விவரம்" data-en="Bank account details"></li>
-                    <li data-ta="ஆடு வளர்ப்புத் திட்டம்" data-en="Goat farming project plan"></li>
-                </ul>
-            </div>
-        </details>
-    </div>
-</div>
-
-<!-- 3. கோழிப் பண்ணைக் கடன் -->
-<div class="loan-card">
-    <div class="poster">
-        <div class="emoji">🐔</div>
-        <div>
-            <h3 data-ta="கோழிப் பண்ணைக் கடன்" data-en="Poultry Farm Loan">கோழிப் பண்ணைக் கடன்</h3>
-            <p data-ta="கோழி வளர்ப்பு மற்றும் பண்ணை அமைப்பதற்கான நிதி உதவி"
-               data-en="Financial support for poultry farming"></p>
-        </div>
-    </div>
-    <div class="loan-content">
-        <details>
-            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
-            <div class="details">
-                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
-                <p data-ta="கோழிக் குஞ்சுகள், கூண்டு, தீவனம் மற்றும் பண்ணை அமைப்பதற்கு."
-                   data-en="For chicks, poultry sheds, feed and farm setup."></p>
-                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
-                <p data-ta="கோழிப் பண்ணை நடத்துவதற்கான இடம் மற்றும் பராமரிப்பு வசதி கொண்டவர்கள்."
-                   data-en="Applicants with suitable space and facilities for poultry farming."></p>
-                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
-                <ul>
-                    <li data-ta="அடையாளச் சான்று" data-en="Identity proof"></li>
-                    <li data-ta="முகவரிச் சான்று" data-en="Address proof"></li>
-                    <li data-ta="பண்ணைத் திட்ட விவரம்" data-en="Poultry project details"></li>
-                </ul>
-            </div>
-        </details>
-    </div>
-</div>
-
-<!-- 4. டிராக்டர் கடன் -->
-<div class="loan-card">
-    <div class="poster">
-        <div class="emoji">🚜</div>
-        <div>
-            <h3 data-ta="டிராக்டர் வாங்கும் கடன்" data-en="Tractor Purchase Loan">டிராக்டர் வாங்கும் கடன்</h3>
-            <p data-ta="விவசாயப் பணிகளுக்குத் தேவையான டிராக்டர் வாங்க"
-               data-en="Finance to purchase a tractor for farm work"></p>
-        </div>
-    </div>
-    <div class="loan-content">
-        <details>
-            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
-            <div class="details">
-                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
-                <p data-ta="நிலத்தை உழுதல், சரக்கு எடுத்துச் செல்லுதல் போன்ற விவசாயப் பணிகளுக்குத் டிராக்டர் வாங்க."
-                   data-en="To purchase a tractor for ploughing, transport and other farm activities."></p>
-                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
-                <p data-ta="விவசாய நிலம் அல்லது விவசாயப் பயன்பாட்டிற்கான திட்டம் கொண்டவர்கள். வங்கியின் நிபந்தனைகள் பொருந்தும்."
-                   data-en="Farmers with agricultural land or a suitable farm-use plan, subject to bank conditions."></p>
-                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
-                <ul>
-                    <li data-ta="ஆதார் அட்டை" data-en="Aadhaar card"></li>
-                    <li data-ta="நில ஆவணங்கள்" data-en="Land records"></li>
-                    <li data-ta="டிராக்டர் விலை மதிப்பீடு" data-en="Tractor quotation"></li>
-                </ul>
-            </div>
-        </details>
-    </div>
-</div>
-
-<!-- 5. விவசாய இயந்திரக் கடன் -->
-<div class="loan-card">
-    <div class="poster">
-        <div class="emoji">⚙️</div>
-        <div>
-            <h3 data-ta="விவசாய இயந்திரக் கடன்" data-en="Farm Machinery Loan">விவசாய இயந்திரக் கடன்</h3>
-            <p data-ta="பவர் டில்லர், அறுவடை இயந்திரம் மற்றும் கருவிகள் வாங்க"
-               data-en="Finance for tillers, harvesters and farm equipment"></p>
-        </div>
-    </div>
-    <div class="loan-content">
-        <details>
-            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
-            <div class="details">
-                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
-                <p data-ta="பவர் டில்லர், பவர் வீடர், விதைப்பு மற்றும் அறுவடை இயந்திரங்கள் வாங்க."
-                   data-en="To purchase power tillers, power weeders, seeders and harvesters."></p>
-                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
-                <p data-ta="விவசாயப் பயன்பாட்டிற்காக இயந்திரம் வாங்க விரும்பும் தகுதியான விவசாயிகள்."
-                   data-en="Eligible farmers purchasing machinery for agricultural use."></p>
-                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
-                <ul>
-                    <li data-ta="அடையாள மற்றும் முகவரிச் சான்று" data-en="Identity and address proof"></li>
-                    <li data-ta="இயந்திர விலை மதிப்பீடு" data-en="Machinery quotation"></li>
-                    <li data-ta="விவசாய நில விவரம்" data-en="Farm land details"></li>
-                </ul>
-            </div>
-        </details>
-    </div>
-</div>
-
-<!-- 6. மீன் வளர்ப்புக் கடன் -->
-<div class="loan-card">
-    <div class="poster">
-        <div class="emoji">🐟</div>
-        <div>
-            <h3 data-ta="மீன் வளர்ப்புக் கடன்" data-en="Fisheries Loan">மீன் வளர்ப்புக் கடன்</h3>
-            <p data-ta="மீன் வளர்ப்பு மற்றும் மீன்வளத் தொழிலுக்கான நிதி உதவி"
-               data-en="Financial support for fish farming and fisheries"></p>
-        </div>
-    </div>
-    <div class="loan-content">
-        <details>
-            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
-            <div class="details">
-                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
-                <p data-ta="மீன் குளம் அமைத்தல், மீன் குஞ்சுகள் வாங்குதல், தீவனம் மற்றும் பராமரிப்புச் செலவுகளுக்கு."
-                   data-en="For fish ponds, fingerlings, feed and maintenance expenses."></p>
-                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
-                <p data-ta="மீன் வளர்ப்புக்கான நீர்நிலை அல்லது தேவையான வசதிகள் கொண்டவர்கள்."
-                   data-en="Applicants with suitable water resources or fish farming facilities."></p>
-                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
-                <ul>
-                    <li data-ta="அடையாளச் சான்று" data-en="Identity proof"></li>
-                    <li data-ta="நிலம் அல்லது குத்தகை விவரம்" data-en="Land or lease details"></li>
-                    <li data-ta="மீன் வளர்ப்புத் திட்டம்" data-en="Fish farming project plan"></li>
-                </ul>
-            </div>
-        </details>
-    </div>
-</div>
-
-<!-- 7. பயிர்க் கடன் -->
-<div class="loan-card">
-    <div class="poster">
-        <div class="emoji">🌾</div>
-        <div>
-            <h3 data-ta="பயிர்க் கடன் - KCC" data-en="Crop Loan - KCC">பயிர்க் கடன் - KCC</h3>
-            <p data-ta="விதை, உரம் மற்றும் சாகுபடிச் செலவுகளுக்கான கடன்"
-               data-en="Credit for seeds, fertilizers and cultivation expenses"></p>
-        </div>
-    </div>
-    <div class="loan-content">
-        <details>
-            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
-            <div class="details">
-                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
-                <p data-ta="விதை, உரம், பூச்சிக்கொல்லி, தொழிலாளர் செலவு மற்றும் பிற பருவகால சாகுபடிச் செலவுகளுக்கு."
-                   data-en="For seeds, fertilizers, pesticides, labour and seasonal cultivation expenses."></p>
-                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
-                <p data-ta="விவசாயிகள் மற்றும் வங்கி விதிகளின்படி தகுதியுள்ள குத்தகை விவசாயிகள்."
-                   data-en="Farmers and eligible tenant cultivators as per bank rules."></p>
-                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
-                <ul>
-                    <li data-ta="ஆதார் அட்டை" data-en="Aadhaar card"></li>
-                    <li data-ta="நில ஆவணங்கள் அல்லது குத்தகை விவரம்" data-en="Land records or lease details"></li>
-                    <li data-ta="வங்கிக் கணக்கு விவரம்" data-en="Bank account details"></li>
-                </ul>
-            </div>
-        </details>
-    </div>
-</div>
-
-<!-- 8. நீர்ப்பாசனக் கடன் -->
-<div class="loan-card">
-    <div class="poster">
-        <div class="emoji">💧</div>
-        <div>
-            <h3 data-ta="நீர்ப்பாசன வசதிக் கடன்" data-en="Irrigation Loan">நீர்ப்பாசன வசதிக் கடன்</h3>
-            <p data-ta="பம்ப் செட், குழாய் மற்றும் நீர்ப்பாசன வசதிகள் அமைக்க"
-               data-en="Finance for pumps, pipes and irrigation facilities"></p>
-        </div>
-    </div>
-    <div class="loan-content">
-        <details>
-            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
-            <div class="details">
-                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
-                <p data-ta="மோட்டார் பம்ப், சொட்டுநீர்ப் பாசனம், குழாய்கள் மற்றும் நீர் சேமிப்பு வசதிகளுக்கு."
-                   data-en="For motor pumps, drip irrigation, pipes and water storage facilities."></p>
-                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
-                <p data-ta="விவசாய நிலம் மற்றும் தேவையான நீர்ப்பாசனத் திட்டம் கொண்டவர்கள்."
-                   data-en="Farmers with agricultural land and a suitable irrigation plan."></p>
-                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
-                <ul>
-                    <li data-ta="நில ஆவணங்கள்" data-en="Land records"></li>
-                    <li data-ta="அடையாளச் சான்று" data-en="Identity proof"></li>
-                    <li data-ta="கருவிகளின் விலை மதிப்பீடு" data-en="Equipment quotation"></li>
-                </ul>
-            </div>
-        </details>
-    </div>
-</div>
-
-<!-- 9. விவசாய நிலம் வாங்கும் கடன் -->
-<div class="loan-card">
-    <div class="poster">
-        <div class="emoji">🌱</div>
-        <div>
-            <h3 data-ta="விவசாய நிலம் வாங்கும் கடன்" data-en="Agricultural Land Purchase Loan">விவசாய நிலம் வாங்கும் கடன்</h3>
-            <p data-ta="விவசாய நிலம் வாங்குவதற்கான வங்கிக் கடன் வாய்ப்பு"
-               data-en="Bank finance options for purchasing agricultural land"></p>
-        </div>
-    </div>
-    <div class="loan-content">
-        <details>
-            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
-            <div class="details">
-                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
-                <p data-ta="விவசாய நோக்கத்திற்காக நிலம் வாங்குவதற்கு."
-                   data-en="For purchasing land for agricultural purposes."></p>
-                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
-                <p data-ta="சிறு மற்றும் குறு விவசாயிகளுக்கான சில வங்கித் திட்டங்கள் இருக்கலாம். நிலத்தின் சட்ட ஆவணங்களும் வங்கியின் விதிகளும் சரிபார்க்கப்படும்."
-                   data-en="Some bank schemes may support small and marginal farmers. Land title and bank conditions must be checked."></p>
-                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
-                <ul>
-                    <li data-ta="நிலத்தின் பட்டா மற்றும் பத்திரம்" data-en="Land patta and deed"></li>
-                    <li data-ta="அடையாள மற்றும் முகவரிச் சான்று" data-en="Identity and address proof"></li>
-                    <li data-ta="வருமான விவரம்" data-en="Income details"></li>
-                </ul>
-            </div>
-        </details>
-    </div>
-</div>
-
-<!-- 10. கால்நடை தீவனக் கடன் -->
-<div class="loan-card">
-    <div class="poster">
-        <div class="emoji">🌿</div>
-        <div>
-            <h3 data-ta="கால்நடை தீவன மற்றும் பராமரிப்புக் கடன்" data-en="Animal Feed and Maintenance Loan">கால்நடை தீவன மற்றும் பராமரிப்புக் கடன்</h3>
-            <p data-ta="கால்நடை தீவனம் மற்றும் அன்றாடப் பண்ணைச் செலவுகளுக்கு"
-               data-en="For animal feed and regular farm expenses"></p>
-        </div>
-    </div>
-    <div class="loan-content">
-        <details>
-            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
-            <div class="details">
-                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
-                <p data-ta="மாட்டுத் தீவனம், வைக்கோல், மருந்துகள் மற்றும் கால்நடை பராமரிப்புச் செலவுகளுக்கு."
-                   data-en="For cattle feed, fodder, medicines and animal maintenance expenses."></p>
-                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
-                <p data-ta="கால்நடை வளர்ப்பில் ஈடுபட்டுள்ள மற்றும் வங்கி விதிகளின்படி தகுதியுள்ளவர்கள்."
-                   data-en="People engaged in animal husbandry who meet bank eligibility rules."></p>
-                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
-                <ul>
-                    <li data-ta="அடையாளச் சான்று" data-en="Identity proof"></li>
-                    <li data-ta="கால்நடை விவரங்கள்" data-en="Livestock details"></li>
-                    <li data-ta="வங்கிக் கணக்கு விவரம்" data-en="Bank account details"></li>
-                </ul>
-            </div>
-        </details>
-    </div>
+<div class="intro">
+ <h2 data-ta="விவசாயக் கடன் திட்டங்கள்"
+ data-en="Agricultural Loan Schemes">விவசாயக் கடன் திட்டங்கள்</h2>
+ <p data-ta="விவசாயம் மற்றும் அதனுடன் தொடர்புடைய தொழில்களுக்கான கடன், தகுதி, ஆவணங்கள் மற்றும் மானியத் தகவல்களை இங்கே தெரிந்துகொள்ளுங்கள்."
+ data-en="Explore loan options, eligibility, documents and subsidy information for agriculture and allied activities.">
+ விவசாயம் மற்றும் அதனுடன் தொடர்புடைய தொழில்களுக்கான கடன், தகுதி, ஆவணங்கள் மற்றும் மானியத் தகவல்களை இங்கே தெரிந்துகொள்ளுங்கள்.
+ </p>
 </div>
 
 <div class="notice">
-    <strong>குறிப்பு:</strong>
-    கடன் தொகை, வட்டி விகிதம், மானியம், தகுதி மற்றும் திருப்பிச் செலுத்தும் காலம் ஆகியவை வங்கி, திட்டம் மற்றும் விண்ணப்பதாரரின் தகுதியைப் பொறுத்து மாறுபடும். மேலே உள்ளவை கடன் வகைகள் பற்றிய பொதுவான தகவல்கள் மட்டுமே; இவை அனைத்தும் தற்போது விண்ணப்பிக்கக் கிடைக்கின்றன என்று பொருள் அல்ல. விண்ணப்பிக்கும் முன் சம்பந்தப்பட்ட வங்கியில் உறுதிப்படுத்தவும்.
+ <strong data-ta="முக்கிய அறிவிப்பு ⚠️" data-en="Important Notice ⚠️">முக்கிய அறிவிப்பு ⚠️</strong>
+ <p data-ta="கீழே உள்ளவை வழிகாட்டும் தகவல்கள். கடன் தொகை, வட்டி விகிதம், வயது வரம்பு, மானியம் மற்றும் தகுதி ஆகியவை வங்கி, மாநில அரசு திட்டம், விண்ணப்பதாரர் மற்றும் நடப்பு விதிமுறைகளைப் பொறுத்து மாறுபடும். விண்ணப்பிக்கும் முன் சம்பந்தப்பட்ட வங்கி அல்லது அரசு அலுவலகத்தில் உறுதிப்படுத்தவும்."
+ data-en="The information below is a general guide. Loan amount, interest rate, age limit, subsidy and eligibility vary by bank, government scheme, applicant and current rules. Confirm details with the bank or government office before applying.">
+ கீழே உள்ளவை வழிகாட்டும் தகவல்கள். கடன் தொகை, வட்டி விகிதம், வயது வரம்பு, மானியம் மற்றும் தகுதி ஆகியவை வங்கி, மாநில அரசு திட்டம், விண்ணப்பதாரர் மற்றும் நடப்பு விதிமுறைகளைப் பொறுத்து மாறுபடும். விண்ணப்பிக்கும் முன் சம்பந்தப்பட்ட வங்கி அல்லது அரசு அலுவலகத்தில் உறுதிப்படுத்தவும்.
+ </p>
+</div>
+
+<!-- 1 DAIRY LOAN -->
+<details class="loan-card">
+<summary><span class="loan-icon">🐄</span>
+<span data-ta="1. பசு / எருமை வாங்கும் கடன்" data-en="1. Dairy Cow / Buffalo Loan">1. பசு / எருமை வாங்கும் கடன்</span></summary>
+<div class="details">
+<h3 data-ta="இந்தக் கடன் எதற்காக?" data-en="Purpose of the Loan">இந்தக் கடன் எதற்காக?</h3>
+<p data-ta="பால் உற்பத்திக்காக பசு அல்லது எருமை வாங்குதல், மாட்டுக் கொட்டகை அமைத்தல், பால் கறக்கும் இயந்திரம் மற்றும் கால்நடை பராமரிப்பு வசதிகள் ஏற்படுத்துதல்."
+data-en="To purchase milch cows or buffaloes, build cattle sheds, buy milking equipment and arrange dairy facilities.">பால் உற்பத்திக்காக பசு அல்லது எருமை வாங்குதல், மாட்டுக் கொட்டகை அமைத்தல், பால் கறக்கும் இயந்திரம் மற்றும் கால்நடை பராமரிப்பு வசதிகள் ஏற்படுத்துதல்.</p>
+
+<h3 data-ta="எந்த வங்கிகளில் கிடைக்கும்?" data-en="Where can you apply?">எந்த வங்கிகளில் கிடைக்கும்?</h3>
+<p>Nationalised Banks, Indian Bank, SBI, Canara Bank, Indian Overseas Bank, Regional Rural Banks, Cooperative Banks மற்றும் PACCS ஆகியவற்றில் தொடர்புடைய கடன் வசதிகள் கிடைக்கலாம்.</p>
+
+<h3 data-ta="யார் விண்ணப்பிக்கலாம்?" data-en="Who is eligible?">யார் விண்ணப்பிக்கலாம்?</h3>
+<ul>
+<li data-ta="பால் மாடு வளர்க்கும் விவசாயிகள் மற்றும் புதிய பால் பண்ணை தொடங்குபவர்கள்."
+data-en="Existing dairy farmers and people planning to start a dairy unit.">பால் மாடு வளர்க்கும் விவசாயிகள் மற்றும் புதிய பால் பண்ணை தொடங்குபவர்கள்.</li>
+<li data-ta="கால்நடைகளைப் பராமரிக்க இடம் மற்றும் அடிப்படை வசதிகள் உள்ளவர்கள்."
+data-en="Applicants with suitable space and basic facilities for livestock.">கால்நடைகளைப் பராமரிக்க இடம் மற்றும் அடிப்படை வசதிகள் உள்ளவர்கள்.</li>
+<li data-ta="குறிப்பிட்ட திட்டத்தின் கீழ் விண்ணப்பித்தால் அந்தத் திட்டத்தின் சமூகப் பிரிவு மற்றும் வருமானத் தகுதிகள் பொருந்த வேண்டும்."
+data-en="Scheme-specific community and income conditions apply where relevant.">குறிப்பிட்ட திட்டத்தின் கீழ் விண்ணப்பித்தால் அந்தத் திட்டத்தின் சமூகப் பிரிவு மற்றும் வருமானத் தகுதிகள் பொருந்த வேண்டும்.</li>
+</ul>
+
+<h3 data-ta="வயது வரம்பு" data-en="Age Limit">வயது வரம்பு</h3>
+<p data-ta="பொதுவான வங்கிக் கடன்களுக்கு வங்கியின் வயது மற்றும் கடன் முடிவடையும் வயது விதிகள் பொருந்தும். TABCEDCO Milch Animal Loan போன்ற குறிப்பிட்ட திட்டங்களுக்கு தனித்தனி தகுதிகள் உள்ளன."
+data-en="Banks set their own minimum and repayment-age conditions. Specific schemes such as the TABCEDCO Milch Animal Loan have separate eligibility rules.">பொதுவான வங்கிக் கடன்களுக்கு வங்கியின் வயது மற்றும் கடன் முடிவடையும் வயது விதிகள் பொருந்தும். TABCEDCO Milch Animal Loan போன்ற குறிப்பிட்ட திட்டங்களுக்கு தனித்தனி தகுதிகள் உள்ளன.</p>
+
+<h3 data-ta="கடன் தொகை, வட்டி, மானியம்" data-en="Loan, Interest and Subsidy">கடன் தொகை, வட்டி, மானியம்</h3>
+<p data-ta="TABCEDCO Milch Animal Loan திட்டத்தில் தகுதியுள்ள BC, MBC மற்றும் DNC பயனாளிகளுக்கு அதிகபட்சம் ₹1.20 லட்சம் வரை கடன், 7% வட்டி மற்றும் 3 ஆண்டுகள் திருப்பிச் செலுத்தும் காலம் என அதிகாரப்பூர்வ திட்டப் பக்கத்தில் குறிப்பிடப்பட்டுள்ளது. திட்ட நிதி அமைப்பு: NBCFDC 85%, TABCEDCO 10%, பயனாளி பங்கு 5%. இது அனைவருக்கும் பொருந்தும் பொதுவான மானியம் அல்ல."
+data-en="The official TABCEDCO Milch Animal Loan page lists up to ₹1.20 lakh, 7% interest and a 3-year repayment period for eligible BC, MBC and DNC applicants. Funding pattern: NBCFDC 85%, TABCEDCO 10%, beneficiary contribution 5%. This is not a universal subsidy.">TABCEDCO Milch Animal Loan திட்டத்தில் தகுதியுள்ள BC, MBC மற்றும் DNC பயனாளிகளுக்கு அதிகபட்சம் ₹1.20 லட்சம் வரை கடன், 7% வட்டி மற்றும் 3 ஆண்டுகள் திருப்பிச் செலுத்தும் காலம் என அதிகாரப்பூர்வ திட்டப் பக்கத்தில் குறிப்பிடப்பட்டுள்ளது. திட்ட நிதி அமைப்பு: NBCFDC 85%, TABCEDCO 10%, பயனாளி பங்கு 5%. இது அனைவருக்கும் பொருந்தும் பொதுவான மானியம் அல்ல.</p>
+
+<h3 data-ta="தேவையான ஆவணங்கள்" data-en="Documents Required">தேவையான ஆவணங்கள்</h3>
+<ul>
+<li>Aadhaar Card / ஆதார் அட்டை</li>
+<li>வங்கி கணக்கு புத்தகம்</li>
+<li>முகவரி மற்றும் அடையாளச் சான்று</li>
+<li>புகைப்படம்</li>
+<li data-ta="கால்நடை வாங்குவதற்கான விலைப்பட்டியல் அல்லது திட்ட அறிக்கை."
+data-en="Animal quotation or project report.">கால்நடை வாங்குவதற்கான விலைப்பட்டியல் அல்லது திட்ட அறிக்கை.</li>
+<li data-ta="தேவைப்பட்டால் வருமானம் மற்றும் சமூகச் சான்றிதழ்."
+data-en="Income and community certificates if required.">தேவைப்பட்டால் வருமானம் மற்றும் சமூகச் சான்றிதழ்.</li>
+</ul>
+<a class="apply" href="https://tabcedco.tn.gov.in/WEB/EN/SCHEME/MILCH" target="_blank" rel="noopener">TABCEDCO Scheme Details ↗</a>
+</div>
+</details>
+
+<!-- 2 GOAT LOAN -->
+<details class="loan-card">
+<summary><span class="loan-icon">🐐</span>
+<span data-ta="2. ஆடு / செம்மறி ஆடு வளர்ப்புக் கடன்" data-en="2. Goat and Sheep Farming Loan">2. ஆடு / செம்மறி ஆடு வளர்ப்புக் கடன்</span></summary>
+<div class="details">
+<h3 data-ta="கடன் எதற்காக?" data-en="Purpose">கடன் எதற்காக?</h3>
+<p data-ta="ஆடுகள் வாங்குதல், கொட்டகை அமைத்தல், தீவனம் வாங்குதல், தடுப்பூசி மற்றும் கால்நடை பராமரிப்பு செலவுகளுக்கு."
+data-en="For purchasing goats or sheep, building sheds, feed, vaccination and animal care.">ஆடுகள் வாங்குதல், கொட்டகை அமைத்தல், தீவனம் வாங்குதல், தடுப்பூசி மற்றும் கால்நடை பராமரிப்பு செலவுகளுக்கு.</p>
+
+<h3 data-ta="எந்த வங்கிகளில்?" data-en="Banks">எந்த வங்கிகளில்?</h3>
+<p>Indian Bank, SBI, Canara Bank, Indian Overseas Bank, Regional Rural Banks, Cooperative Banks மற்றும் PACCS ஆகியவற்றில் கால்நடை வளர்ப்பு கடன் / KCC வசதி பற்றி விசாரிக்கலாம்.</p>
+
+<h3 data-ta="யார் தகுதியானவர்கள்?" data-en="Eligibility">யார் தகுதியானவர்கள்?</h3>
+<ul>
+<li data-ta="ஆடு வளர்ப்பு தொழில் செய்ய விரும்பும் விவசாயிகள்."
+data-en="Farmers planning goat or sheep farming.">ஆடு வளர்ப்பு தொழில் செய்ய விரும்பும் விவசாயிகள்.</li>
+<li data-ta="ஆடுகளை வளர்க்க இடம் மற்றும் பராமரிப்பு வசதி உள்ளவர்கள்."
+data-en="Applicants with suitable space and animal-care facilities.">ஆடுகளை வளர்க்க இடம் மற்றும் பராமரிப்பு வசதி உள்ளவர்கள்.</li>
+<li data-ta="SHG மற்றும் JLG குழுக்களும் திட்ட விதிகளின்படி விண்ணப்பிக்கலாம்."
+data-en="SHGs and JLGs may also apply subject to scheme rules.">SHG மற்றும் JLG குழுக்களும் திட்ட விதிகளின்படி விண்ணப்பிக்கலாம்.</li>
+</ul>
+
+<h3 data-ta="வயது வரம்பு" data-en="Age Limit">வயது வரம்பு</h3>
+<p data-ta="வங்கிக் கடனுக்கு வங்கியின் வயது நிபந்தனை பொருந்தும். தமிழ்நாடு Vetri Magalir Goat/Sheep Rearing திட்டத்தில் தகுதியுள்ள பெண்களுக்கு 18–60 வயது வரம்பு குறிப்பிடப்பட்டுள்ளது."
+data-en="Bank loan age rules vary. Tamil Nadu's Vetri Magalir Goat/Sheep Rearing scheme lists an age range of 18–60 for eligible women.">வங்கிக் கடனுக்கு வங்கியின் வயது நிபந்தனை பொருந்தும். தமிழ்நாடு Vetri Magalir Goat/Sheep Rearing திட்டத்தில் தகுதியுள்ள பெண்களுக்கு 18–60 வயது வரம்பு குறிப்பிடப்பட்டுள்ளது.</p>
+
+<h3 data-ta="கடன் / மானியம்" data-en="Loan / Subsidy">கடன் / மானியம்</h3>
+<p data-ta="வங்கிக் கடன் தொகை திட்ட அறிக்கை, ஆடுகளின் எண்ணிக்கை, விலை மற்றும் திருப்பிச் செலுத்தும் திறனைப் பொறுத்தது. தமிழ்நாடு Vetri Magalir திட்டத்தில் தகுதியுள்ள பெண்களுக்கு 5 ஆடுகள் அல்லது செம்மறி ஆடுகள் 100% மானியத்தில் வழங்கப்படுவதாக அரசு இணையதளம் தெரிவிக்கிறது. இது வங்கிக் கடன் அல்ல; தனித்திட்டம்."
+data-en="Bank loan amounts depend on the project, number and cost of animals and repayment capacity. Tamil Nadu's Vetri Magalir scheme states that eligible women may receive five goats or sheep with 100% subsidy. This is a separate welfare scheme, not a bank loan.">வங்கிக் கடன் தொகை திட்ட அறிக்கை, ஆடுகளின் எண்ணிக்கை, விலை மற்றும் திருப்பிச் செலுத்தும் திறனைப் பொறுத்தது. தமிழ்நாடு Vetri Magalir திட்டத்தில் தகுதியுள்ள பெண்களுக்கு 5 ஆடுகள் அல்லது செம்மறி ஆடுகள் 100% மானியத்தில் வழங்கப்படுவதாக அரசு இணையதளம் தெரிவிக்கிறது. இது வங்கிக் கடன் அல்ல; தனித்திட்டம்.</p>
+
+<h3 data-ta="தேவையான ஆவணங்கள்" data-en="Documents Required">தேவையான ஆவணங்கள்</h3>
+<ul>
+<li>ஆதார் அட்டை, புகைப்படம்</li>
+<li>வங்கி கணக்கு விவரம்</li>
+<li>முகவரி / அடையாளச் சான்று</li>
+<li data-ta="கொட்டகை இட விவரம் மற்றும் ஆடு வாங்கும் திட்ட அறிக்கை."
+data-en="Shed location details and goat-farming project report.">கொட்டகை இட விவரம் மற்றும் ஆடு வாங்கும் திட்ட அறிக்கை.</li>
+<li data-ta="திட்டம் கோரினால் வருமானம் / சமூகச் சான்றிதழ்."
+data-en="Income or community certificate if required by the scheme.">திட்டம் கோரினால் வருமானம் / சமூகச் சான்றிதழ்.</li>
+</ul>
+<a class="apply" href="https://tnahschemes.tn.gov.in/" target="_blank" rel="noopener">Tamil Nadu Animal Husbandry Schemes ↗</a>
+</div>
+</details>
+
+<!-- 3 POULTRY -->
+<details class="loan-card">
+<summary><span class="loan-icon">🐔</span>
+<span data-ta="3. கோழிப்பண்ணை கடன்" data-en="3. Poultry Farming Loan">3. கோழிப்பண்ணை கடன்</span></summary>
+<div class="details">
+<h3 data-ta="கடன் எதற்காக?" data-en="Purpose">கடன் எதற்காக?</h3>
+<p data-ta="கோழிக்குஞ்சுகள் வாங்குதல், கூண்டு மற்றும் பண்ணை அமைத்தல், தீவனம், குடிநீர் வசதி, முட்டை சேகரிப்பு மற்றும் தேவையான உபகரணங்கள் வாங்குதல்."
+data-en="For chicks, poultry sheds, feed, water facilities, egg collection and equipment.">கோழிக்குஞ்சுகள் வாங்குதல், கூண்டு மற்றும் பண்ணை அமைத்தல், தீவனம், குடிநீர் வசதி, முட்டை சேகரிப்பு மற்றும் தேவையான உபகரணங்கள் வாங்குதல்.</p>
+
+<h3 data-ta="எந்த வங்கிகளில்?" data-en="Banks">எந்த வங்கிகளில்?</h3>
+<p>Indian Bank, SBI, Canara Bank, Indian Overseas Bank, Regional Rural Banks மற்றும் Cooperative Banks ஆகியவற்றில் Poultry / Animal Husbandry loan பற்றி விசாரிக்கலாம்.</p>
+
+<h3 data-ta="யார் விண்ணப்பிக்கலாம்?" data-en="Eligibility">யார் விண்ணப்பிக்கலாம்?</h3>
+<ul>
+<li data-ta="புதிய அல்லது ஏற்கனவே கோழிப்பண்ணை நடத்துபவர்கள்."
+data-en="New or existing poultry farmers.">புதிய அல்லது ஏற்கனவே கோழிப்பண்ணை நடத்துபவர்கள்.</li>
+<li data-ta="பண்ணை அமைக்க ஏற்ற இடம் மற்றும் பராமரிப்பு வசதி உள்ளவர்கள்."
+data-en="Applicants with suitable land and facilities.">பண்ணை அமைக்க ஏற்ற இடம் மற்றும் பராமரிப்பு வசதி உள்ளவர்கள்.</li>
+<li data-ta="வங்கிக்கு ஏற்ற திட்ட அறிக்கை மற்றும் திருப்பிச் செலுத்தும் திறன் கொண்டவர்கள்."
+data-en="Applicants with a bank-acceptable project report and repayment capacity.">வங்கிக்கு ஏற்ற திட்ட அறிக்கை மற்றும் திருப்பிச் செலுத்தும் திறன் கொண்டவர்கள்.</li>
+</ul>
+
+<h3 data-ta="வயது, கடன் தொகை, வட்டி" data-en="Age, Loan and Interest">வயது, கடன் தொகை, வட்டி</h3>
+<p data-ta="வயது வரம்பு மற்றும் கடன் தொகை வங்கி விதிகளின்படி மாறும். பண்ணையின் அளவு, கோழிகளின் எண்ணிக்கை, கட்டுமானச் செலவு, வருமான மதிப்பீடு ஆகியவற்றின் அடிப்படையில் வங்கி முடிவு செய்யும். ஒரே மாதிரியான வட்டி விகிதம் எல்லா வங்கிகளிலும் கிடையாது."
+data-en="Age limits and loan amounts vary by bank. The bank assesses farm size, bird count, construction cost and projected income. There is no single interest rate across all banks.">வயது வரம்பு மற்றும் கடன் தொகை வங்கி விதிகளின்படி மாறும். பண்ணையின் அளவு, கோழிகளின் எண்ணிக்கை, கட்டுமானச் செலவு, வருமான மதிப்பீடு ஆகியவற்றின் அடிப்படையில் வங்கி முடிவு செய்யும். ஒரே மாதிரியான வட்டி விகிதம் எல்லா வங்கிகளிலும் கிடையாது.</p>
+
+<h3 data-ta="மானியம்" data-en="Subsidy">மானியம்</h3>
+<p data-ta="கோழிப்பண்ணைக்கு எல்லோருக்கும் பொதுவான நிரந்தர மானியம் கிடையாது. குறிப்பிட்ட மாநில / மத்திய அரசு திட்டம் அல்லது தகுதியான பிரிவு திட்டம் திறந்திருக்கும் போது மட்டுமே மானியம் கிடைக்கும். விண்ணப்பிக்கும் முன் மாவட்ட கால்நடை பராமரிப்புத் துறையில் விசாரிக்கவும்."
+data-en="There is no universal fixed subsidy for every poultry farm. Subsidy is available only under specific open government schemes and eligible categories. Check with the district Animal Husbandry Department before applying.">கோழிப்பண்ணைக்கு எல்லோருக்கும் பொதுவான நிரந்தர மானியம் கிடையாது. குறிப்பிட்ட மாநில / மத்திய அரசு திட்டம் அல்லது தகுதியான பிரிவு திட்டம் திறந்திருக்கும் போது மட்டுமே மானியம் கிடைக்கும். விண்ணப்பிக்கும் முன் மாவட்ட கால்நடை பராமரிப்புத் துறையில் விசாரிக்கவும்.</p>
+
+<h3 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h3>
+<ul>
+<li>ஆதார், புகைப்படம், வங்கி கணக்கு</li>
+<li>முகவரி மற்றும் அடையாளச் சான்று</li>
+<li data-ta="நிலம் / குத்தகை ஆவணம் அல்லது பண்ணை இடச் சான்று."
+data-en="Land or lease document / farm location proof.">நிலம் / குத்தகை ஆவணம் அல்லது பண்ணை இடச் சான்று.</li>
+<li data-ta="கோழிகளின் எண்ணிக்கை மற்றும் செலவுகளுடன் திட்ட அறிக்கை."
+data-en="Project report showing bird count and costs.">கோழிகளின் எண்ணிக்கை மற்றும் செலவுகளுடன் திட்ட அறிக்கை.</li>
+<li data-ta="வங்கி கோரும் உரிமம் அல்லது உள்ளாட்சி அனுமதி, பொருந்துமிடத்தில்."
+data-en="Required licence or local approval, where applicable.">வங்கி கோரும் உரிமம் அல்லது உள்ளாட்சி அனுமதி, பொருந்துமிடத்தில்.</li>
+</ul>
+</div>
+</details>
+
+<!-- 4 TRACTOR -->
+<details class="loan-card">
+<summary><span class="loan-icon">🚜</span>
+<span data-ta="4. டிராக்டர் வாங்கும் கடன்" data-en="4. Tractor Purchase Loan">4. டிராக்டர் வாங்கும் கடன்</span></summary>
+<div class="details">
+<h3 data-ta="கடன் எதற்காக?" data-en="Purpose">கடன் எதற்காக?</h3>
+<p data-ta="விவசாயப் பயன்பாட்டிற்காக புதிய டிராக்டர் மற்றும் தேவையான இணைப்புக் கருவிகள் வாங்குதல்."
+data-en="To purchase a new tractor and compatible farm implements for agricultural use.">விவசாயப் பயன்பாட்டிற்காக புதிய டிராக்டர் மற்றும் தேவையான இணைப்புக் கருவிகள் வாங்குதல்.</p>
+
+<h3 data-ta="எந்த வங்கிகளில்?" data-en="Banks">எந்த வங்கிகளில்?</h3>
+<p>SBI, Indian Bank, Canara Bank, Indian Overseas Bank, Regional Rural Banks மற்றும் Cooperative / Agriculture Development Banks ஆகியவற்றில் Tractor Term Loan பற்றி விசாரிக்கலாம்.</p>
+
+<h3 data-ta="யார் தகுதியானவர்கள்?" data-en="Eligibility">யார் தகுதியானவர்கள்?</h3>
+<ul>
+<li data-ta="சொந்தமாக விவசாயம் செய்பவர்கள் அல்லது வங்கி ஏற்கும் விவசாயப் பயன்பாட்டுத் திட்டம் கொண்டவர்கள்."
+data-en="Farmers or applicants with an agricultural-use plan accepted by the bank.">சொந்தமாக விவசாயம் செய்பவர்கள் அல்லது வங்கி ஏற்கும் விவசாயப் பயன்பாட்டுத் திட்டம் கொண்டவர்கள்.</li>
+<li data-ta="டிராக்டர் இயக்கவும் பராமரிக்கவும் ஏற்ற வசதிகள் உள்ளவர்கள்."
+data-en="Applicants able to operate and maintain the tractor.">டிராக்டர் இயக்கவும் பராமரிக்கவும் ஏற்ற வசதிகள் உள்ளவர்கள்.</li>
+<li data-ta="வங்கியின் கடன் மதிப்பீடு மற்றும் திருப்பிச் செலுத்தும் திறனைப் பூர்த்தி செய்பவர்கள்."
+data-en="Applicants meeting the bank's credit assessment and repayment requirements.">வங்கியின் கடன் மதிப்பீடு மற்றும் திருப்பிச் செலுத்தும் திறனைப் பூர்த்தி செய்பவர்கள்.</li>
+</ul>
+
+<h3 data-ta="வயது மற்றும் கடன் தொகை" data-en="Age and Loan Amount">வயது மற்றும் கடன் தொகை</h3>
+<p data-ta="வங்கியின் வயது விதிகள் பொருந்தும். கடன் தொகை டிராக்டர் விலை, முன்பணம், விவசாய வருமானம், கடன் வரலாறு மற்றும் வங்கியின் மதிப்பீட்டைப் பொறுத்தது."
+data-en="The bank's age rules apply. Loan amount depends on tractor price, margin contribution, farm income, credit history and bank assessment.">வங்கியின் வயது விதிகள் பொருந்தும். கடன் தொகை டிராக்டர் விலை, முன்பணம், விவசாய வருமானம், கடன் வரலாறு மற்றும் வங்கியின் மதிப்பீட்டைப் பொறுத்தது.</p>
+
+<h3 data-ta="மானியம்" data-en="Subsidy">மானியம்</h3>
+<p data-ta="தமிழ்நாடு வேளாண் பொறியியல் துறை திட்டங்களில் தகுதியுள்ள சிறு, குறு, SC/ST மற்றும் பெண்கள் விவசாயிகளுக்கு அங்கீகரிக்கப்பட்ட இயந்திரங்களுக்கு 50% வரை அல்லது அரசு நிர்ணயித்த அதிகபட்ச வரம்பு வரை உதவி இருக்கலாம். மற்ற பயனாளிகளுக்கு 40% வரை அல்லது நிர்ணயிக்கப்பட்ட உச்சவரம்பு பொருந்தலாம். டிராக்டர் வகை, திட்டம், ஒதுக்கீடு மற்றும் தகுதி உறுதிப்படுத்தப்பட வேண்டும்."
+data-en="Tamil Nadu Agricultural Engineering schemes may provide up to 50% assistance or the prescribed cap for eligible small/marginal, SC/ST and women farmers, and up to 40% or the prescribed cap for other beneficiaries on approved machinery. Tractor eligibility, scheme availability and caps must be confirmed.">தமிழ்நாடு வேளாண் பொறியியல் துறை திட்டங்களில் தகுதியுள்ள சிறு, குறு, SC/ST மற்றும் பெண்கள் விவசாயிகளுக்கு அங்கீகரிக்கப்பட்ட இயந்திரங்களுக்கு 50% வரை அல்லது அரசு நிர்ணயித்த அதிகபட்ச வரம்பு வரை உதவி இருக்கலாம். மற்ற பயனாளிகளுக்கு 40% வரை அல்லது நிர்ணயிக்கப்பட்ட உச்சவரம்பு பொருந்தலாம். டிராக்டர் வகை, திட்டம், ஒதுக்கீடு மற்றும் தகுதி உறுதிப்படுத்தப்பட வேண்டும்.</p>
+
+<h3 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h3>
+<ul>
+<li>ஆதார், புகைப்படம், வங்கி கணக்கு</li>
+<li data-ta="நில ஆவணம் / சிட்டா / அடங்கல் அல்லது வங்கி ஏற்கும் விவசாயச் சான்று."
+data-en="Land record / Chitta / Adangal or other accepted farming proof.">நில ஆவணம் / சிட்டா / அடங்கல் அல்லது வங்கி ஏற்கும் விவசாயச் சான்று.</li>
+<li data-ta="டிராக்டர் விலைப்பட்டியல் மற்றும் விற்பனையாளர் விவரம்."
+data-en="Tractor quotation and dealer details.">டிராக்டர் விலைப்பட்டியல் மற்றும் விற்பனையாளர் விவரம்.</li>
+<li data-ta="வங்கி கேட்கும் வருமானம் மற்றும் கடன் தொடர்பான ஆவணங்கள்."
+data-en="Income and credit documents requested by the bank.">வங்கி கேட்கும் வருமானம் மற்றும் கடன் தொடர்பான ஆவணங்கள்.</li>
+</ul>
+<a class="apply" href="https://www.tnagrisnet.tn.gov.in/" target="_blank" rel="noopener">Tamil Nadu Agriculture Portal ↗</a>
+</div>
+</details>
+
+<!-- 5 MACHINERY -->
+<details class="loan-card">
+<summary><span class="loan-icon">⚙️</span>
+<span data-ta="5. விவசாய இயந்திரங்கள் வாங்கும் கடன்" data-en="5. Farm Machinery Loan">5. விவசாய இயந்திரங்கள் வாங்கும் கடன்</span></summary>
+<div class="details">
+<h3 data-ta="கடன் எதற்காக?" data-en="Purpose">கடன் எதற்காக?</h3>
+<p data-ta="பவர் டில்லர், ரோட்டவேட்டர், விதை விதைக்கும் இயந்திரம், நெல் நடவு இயந்திரம், அறுவடை இயந்திரம், தெளிப்பான், டிரிப் உபகரணங்கள் போன்றவற்றை வாங்க."
+data-en="To purchase power tillers, rotavators, seed drills, paddy transplanters, harvesters, sprayers and drip equipment.">பவர் டில்லர், ரோட்டவேட்டர், விதை விதைக்கும் இயந்திரம், நெல் நடவு இயந்திரம், அறுவடை இயந்திரம், தெளிப்பான், டிரிப் உபகரணங்கள் போன்றவற்றை வாங்க.</p>
+
+<h3 data-ta="எந்த வங்கிகளில்?" data-en="Banks">எந்த வங்கிகளில்?</h3>
+<p>Indian Bank, SBI, Canara Bank, Indian Overseas Bank, Regional Rural Banks, Cooperative Banks மற்றும் PACCS ஆகியவற்றில் விவசாய இயந்திரக் கடன் பற்றி விசாரிக்கலாம்.</p>
+
+<h3 data-ta="யார் விண்ணப்பிக்கலாம்?" data-en="Eligibility">யார் விண்ணப்பிக்கலாம்?</h3>
+<ul>
+<li data-ta="விவசாயிகள் மற்றும் விவசாயக் குழுக்கள்."
+data-en="Individual farmers and farmer groups.">விவசாயிகள் மற்றும் விவசாயக் குழுக்கள்.</li>
+<li data-ta="இயந்திரத்தை விவசாயப் பயன்பாட்டில் பயன்படுத்துபவர்கள்."
+data-en="Applicants using the machinery for agricultural purposes.">இயந்திரத்தை விவசாயப் பயன்பாட்டில் பயன்படுத்துபவர்கள்.</li>
+<li data-ta="Custom Hiring Centre அமைக்க விரும்பும் தகுதியான குழுக்கள்."
+data-en="Eligible groups planning to establish a Custom Hiring Centre.">Custom Hiring Centre அமைக்க விரும்பும் தகுதியான குழுக்கள்.</li>
+</ul>
+
+<h3 data-ta="கடன் / மானியம்" data-en="Loan / Subsidy">கடன் / மானியம்</h3>
+<p data-ta="வங்கி கடன் இயந்திர விலை மற்றும் விண்ணப்பதாரரின் தகுதியைப் பொறுத்தது. தமிழ்நாடு வேளாண் பொறியியல் துறை வழிகாட்டுதலில் தகுதியான விவசாயிகளுக்கு சில அங்கீகரிக்கப்பட்ட இயந்திரங்களுக்கு 50% வரை அல்லது நிர்ணயிக்கப்பட்ட உச்சவரம்பு; பிற பயனாளிகளுக்கு 40% வரை அல்லது உச்சவரம்பு உதவி குறிப்பிடப்பட்டுள்ளது. சில பிரிவுகளுக்கு கூடுதல் மாநில உதவியும் இருக்கலாம். தற்போதைய திட்டத்தில் அந்த இயந்திரம் சேர்க்கப்பட்டுள்ளதா என்பதைச் சரிபார்க்கவும்."
+data-en="Bank finance depends on equipment cost and applicant eligibility. Tamil Nadu Agricultural Engineering guidance lists assistance up to 50% or the prescribed cap for certain approved machinery for eligible farmers, and up to 40% or the cap for other beneficiaries. Additional state support may apply to certain categories. Check current scheme coverage for the specific machine.">வங்கி கடன் இயந்திர விலை மற்றும் விண்ணப்பதாரரின் தகுதியைப் பொறுத்தது. தமிழ்நாடு வேளாண் பொறியியல் துறை வழிகாட்டுதலில் தகுதியான விவசாயிகளுக்கு சில அங்கீகரிக்கப்பட்ட இயந்திரங்களுக்கு 50% வரை அல்லது நிர்ணயிக்கப்பட்ட உச்சவரம்பு; பிற பயனாளிகளுக்கு 40% வரை அல்லது உச்சவரம்பு உதவி குறிப்பிடப்பட்டுள்ளது. சில பிரிவுகளுக்கு கூடுதல் மாநில உதவியும் இருக்கலாம். தற்போதைய திட்டத்தில் அந்த இயந்திரம் சேர்க்கப்பட்டுள்ளதா என்பதைச் சரிபார்க்கவும்.</p>
+
+<h3 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h3>
+<ul>
+<li>ஆதார், புகைப்படம், வங்கி கணக்கு</li>
+<li>நில ஆவணம் / விவசாயச் சான்று</li>
+<li>இயந்திர விலைப்பட்டியல்</li>
+<li data-ta="சமூகச் சான்றிதழ், சிறு / குறு விவசாயி சான்று - பொருந்தினால்."
+data-en="Community or small/marginal farmer certificate, where applicable.">சமூகச் சான்றிதழ், சிறு / குறு விவசாயி சான்று - பொருந்தினால்.</li>
+</ul>
+<a class="apply" href="https://www.tnagrisnet.tn.gov.in/" target="_blank" rel="noopener">Agriculture Schemes ↗</a>
+</div>
+</details>
+
+<!-- 6 FISHERIES -->
+<details class="loan-card">
+<summary><span class="loan-icon">🐟</span>
+<span data-ta="6. மீன்வளர்ப்பு / மீன்பிடி கடன்" data-en="6. Fisheries and Fish Farming Loan">6. மீன்வளர்ப்பு / மீன்பிடி கடன்</span></summary>
+<div class="details">
+<h3 data-ta="கடன் எதற்காக?" data-en="Purpose">கடன் எதற்காக?</h3>
+<p data-ta="மீன் குளம் அமைத்தல், மீன் குஞ்சுகள், தீவனம், வலை, படகு, மீன் வளர்ப்பு உபகரணங்கள் மற்றும் அன்றாட செயல்பாட்டு செலவுகளுக்கு."
+data-en="For fish ponds, fingerlings, feed, nets, boats, aquaculture equipment and working capital.">மீன் குளம் அமைத்தல், மீன் குஞ்சுகள், தீவனம், வலை, படகு, மீன் வளர்ப்பு உபகரணங்கள் மற்றும் அன்றாட செயல்பாட்டு செலவுகளுக்கு.</p>
+
+<h3 data-ta="எந்த வங்கிகளில்?" data-en="Banks">எந்த வங்கிகளில்?</h3>
+<p>Commercial Banks, Cooperative Banks மற்றும் Regional Rural Banks மூலம் Fisheries KCC மற்றும் முதலீட்டுக் கடன் பற்றி விசாரிக்கலாம்.</p>
+
+<h3 data-ta="யார் தகுதியானவர்கள்?" data-en="Eligibility">யார் தகுதியானவர்கள்?</h3>
+<ul>
+<li data-ta="மீனவர்கள் மற்றும் மீன் பண்ணையாளர்கள்."
+data-en="Fishers and fish farmers.">மீனவர்கள் மற்றும் மீன் பண்ணையாளர்கள்.</li>
+<li data-ta="குளம் அல்லது மீன் வளர்ப்பு வசதியை சொந்தமாக வைத்திருப்பவர்கள் அல்லது சட்டப்படி குத்தகைக்கு எடுத்தவர்கள்."
+data-en="People who own or legally lease ponds or fish-farming facilities.">குளம் அல்லது மீன் வளர்ப்பு வசதியை சொந்தமாக வைத்திருப்பவர்கள் அல்லது சட்டப்படி குத்தகைக்கு எடுத்தவர்கள்.</li>
+<li data-ta="SHG, JLG மற்றும் மீனவர் குழுக்கள் திட்ட விதிகளின்படி விண்ணப்பிக்கலாம்."
+data-en="SHGs, JLGs and fisher groups may apply subject to scheme rules.">SHG, JLG மற்றும் மீனவர் குழுக்கள் திட்ட விதிகளின்படி விண்ணப்பிக்கலாம்.</li>
+</ul>
+
+<h3 data-ta="வயது / கடன் தொகை / வட்டி" data-en="Age / Loan / Interest">வயது / கடன் தொகை / வட்டி</h3>
+<p data-ta="வங்கியின் வயது நிபந்தனை பொருந்தும். Fisheries KCC கடன் வரம்பு தகுதி, செயல்பாடு மற்றும் வங்கியின் மதிப்பீட்டைப் பொறுத்தது. மத்திய மீன்வளத் துறை தகவலின்படி புதிய Fisheries KCC அட்டைக்கு செயல்பாட்டு மூலதனத் தேவைக்காக ₹2 லட்சம் வரம்பு குறிப்பிடப்பட்டுள்ளது; ஏற்கனவே உள்ள KCC-க்கு மொத்த வரம்பு மற்றும் வட்டி சலுகை விதிகள் வேறுபடலாம்."
+data-en="Bank age rules apply. Fisheries KCC limits depend on eligibility, activity and bank assessment. The Department of Fisheries lists a ₹2 lakh working-capital limit for new Fisheries KCC holders; existing KCC holders may have different overall limits and interest-benefit rules.">வங்கியின் வயது நிபந்தனை பொருந்தும். Fisheries KCC கடன் வரம்பு தகுதி, செயல்பாடு மற்றும் வங்கியின் மதிப்பீட்டைப் பொறுத்தது. மத்திய மீன்வளத் துறை தகவலின்படி புதிய Fisheries KCC அட்டைக்கு செயல்பாட்டு மூலதனத் தேவைக்காக ₹2 லட்சம் வரம்பு குறிப்பிடப்பட்டுள்ளது; ஏற்கனவே உள்ள KCC-க்கு மொத்த வரம்பு மற்றும் வட்டி சலுகை விதிகள் வேறுபடலாம்.</p>
+
+<h3 data-ta="வட்டி சலுகை / மானியம்" data-en="Interest Benefit / Subsidy">வட்டி சலுகை / மானியம்</h3>
+<p data-ta="KCC-க்கு தகுதி உள்ளவர்களுக்கு அரசு அறிவிக்கும் வட்டி சலுகை மற்றும் சரியான நேரத்தில் திருப்பிச் செலுத்தும் ஊக்கத்தொகை பொருந்தலாம். இது நிரந்தர மூலதன மானியம் அல்ல. குளம் அமைத்தல் போன்ற முதலீட்டுக்கு தனித் திட்ட மானியம் இருந்தால் அதன் விதிகள் தனியாகப் பொருந்தும்."
+data-en="Eligible KCC borrowers may receive government interest subvention and prompt repayment incentives when applicable. This is not a capital subsidy. Separate scheme rules apply for any pond-construction or infrastructure subsidy.">KCC-க்கு தகுதி உள்ளவர்களுக்கு அரசு அறிவிக்கும் வட்டி சலுகை மற்றும் சரியான நேரத்தில் திருப்பிச் செலுத்தும் ஊக்கத்தொகை பொருந்தலாம். இது நிரந்தர மூலதன மானியம் அல்ல. குளம் அமைத்தல் போன்ற முதலீட்டுக்கு தனித் திட்ட மானியம் இருந்தால் அதன் விதிகள் தனியாகப் பொருந்தும்.</p>
+
+<h3 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h3>
+<ul>
+<li>ஆதார், புகைப்படம், வங்கி கணக்கு</li>
+<li data-ta="மீனவர் அடையாள அட்டை / மீன்வளத் துறை பதிவு, பொருந்தினால்."
+data-en="Fisher identity card or fisheries registration, where applicable.">மீனவர் அடையாள அட்டை / மீன்வளத் துறை பதிவு, பொருந்தினால்.</li>
+<li data-ta="குளம் / குத்தகை / படகு உரிமை ஆவணங்கள்."
+data-en="Pond, lease or boat ownership documents.">குளம் / குத்தகை / படகு உரிமை ஆவணங்கள்.</li>
+<li data-ta="தேவையான உரிமம் அல்லது அனுமதி."
+data-en="Required licence or permission.">தேவையான உரிமம் அல்லது அனுமதி.</li>
+</ul>
+<a class="apply" href="https://www.dof.gov.in/offerings/schemes-and-services/details/kisan-credit-card-2-ITMyUTMtQWa" target="_blank" rel="noopener">Fisheries KCC Official Details ↗</a>
+</div>
+</details>
+
+<!-- 7 CROP KCC -->
+<details class="loan-card">
+<summary><span class="loan-icon">🌾</span>
+<span data-ta="7. பயிர் கடன் – Kisan Credit Card (KCC)" data-en="7. Crop Loan – Kisan Credit Card (KCC)">7. பயிர் கடன் – Kisan Credit Card (KCC)</span></summary>
+<div class="details">
+<h3 data-ta="இந்தக் கடன் எதற்காக?" data-en="Purpose">இந்தக் கடன் எதற்காக?</h3>
+<p data-ta="விதை, உரம், பூச்சிக்கொல்லி, தொழிலாளர் செலவு, பாசனம், அறுவடை மற்றும் பயிர் சாகுபடிக்கான பருவகால செலவுகளுக்கு."
+data-en="For seeds, fertilisers, pesticides, labour, irrigation, harvesting and seasonal cultivation expenses.">விதை, உரம், பூச்சிக்கொல்லி, தொழிலாளர் செலவு, பாசனம், அறுவடை மற்றும் பயிர் சாகுபடிக்கான பருவகால செலவுகளுக்கு.</p>
+
+<h3 data-ta="எந்த வங்கிகளில்?" data-en="Banks">எந்த வங்கிகளில்?</h3>
+<p>Public Sector Banks, Private Sector Banks, Regional Rural Banks, Cooperative Banks மற்றும் PACCS வழியாக KCC பற்றி விண்ணப்பிக்கலாம்.</p>
+
+<h3 data-ta="யார் தகுதியானவர்கள்?" data-en="Eligibility">யார் தகுதியானவர்கள்?</h3>
+<ul>
+<li data-ta="சொந்த நிலத்தில் விவசாயம் செய்பவர்கள்."
+data-en="Owner cultivators.">சொந்த நிலத்தில் விவசாயம் செய்பவர்கள்.</li>
+<li data-ta="குத்தகை விவசாயிகள், வாய்மொழி குத்தகையாளர்கள் மற்றும் பங்கு விவசாயிகள் - வங்கி விதிகளின்படி."
+data-en="Tenant farmers, oral lessees and sharecroppers, subject to bank rules.">குத்தகை விவசாயிகள், வாய்மொழி குத்தகையாளர்கள் மற்றும் பங்கு விவசாயிகள் - வங்கி விதிகளின்படி.</li>
+<li data-ta="விவசாய SHG / JLG குழுக்கள்."
+data-en="Farmer SHGs and JLGs.">விவசாய SHG / JLG குழுக்கள்.</li>
+</ul>
+
+<h3 data-ta="வயது மற்றும் கடன் தொகை" data-en="Age and Loan Limit">வயது மற்றும் கடன் தொகை</h3>
+<p data-ta="வயது வரம்பை வங்கி நிர்ணயிக்கும். கடன் வரம்பு பயிர் வகை, சாகுபடி பரப்பளவு, மாவட்ட Scale of Finance மற்றும் வங்கியின் மதிப்பீட்டின் அடிப்படையில் நிர்ணயிக்கப்படும்."
+data-en="The bank sets the age limit. Credit limit is based on crop, cultivated area, district Scale of Finance and bank assessment.">வயது வரம்பை வங்கி நிர்ணயிக்கும். கடன் வரம்பு பயிர் வகை, சாகுபடி பரப்பளவு, மாவட்ட Scale of Finance மற்றும் வங்கியின் மதிப்பீட்டின் அடிப்படையில் நிர்ணயிக்கப்படும்.</p>
+
+<h3 data-ta="வட்டி சலுகை" data-en="Interest Benefit">வட்டி சலுகை</h3>
+<p data-ta="2025–26 நிதியாண்டுக்கான RBI அறிவிப்பில் தகுதியான குறுகிய கால KCC பயிர் மற்றும் தொடர்புடைய செயல்பாட்டு கடன்களுக்கு ₹3 லட்சம் வரையிலான ஒட்டுமொத்த வரம்பில் வட்டி சலுகை அமைப்பு குறிப்பிடப்பட்டுள்ளது. உரிய நேரத்தில் திருப்பிச் செலுத்தும் தகுதியுள்ள விவசாயிகளுக்கு பயனுள்ள வட்டி விகிதம் 4% வரை குறையக்கூடும். புதிய நிதியாண்டு விதிகள் மாறலாம்; வங்கியில் நடப்பு விகிதத்தை உறுதிப்படுத்தவும்."
+data-en="The RBI notification for FY 2025–26 describes an interest-subvention framework on eligible short-term KCC crop and allied-activity loans within an overall limit of ₹3 lakh. Eligible prompt repayments may reduce the effective rate to 4%. Rules can change in a new financial year; confirm the current rate with the bank.">2025–26 நிதியாண்டுக்கான RBI அறிவிப்பில் தகுதியான குறுகிய கால KCC பயிர் மற்றும் தொடர்புடைய செயல்பாட்டு கடன்களுக்கு ₹3 லட்சம் வரையிலான ஒட்டுமொத்த வரம்பில் வட்டி சலுகை அமைப்பு குறிப்பிடப்பட்டுள்ளது. உரிய நேரத்தில் திருப்பிச் செலுத்தும் தகுதியுள்ள விவசாயிகளுக்கு பயனுள்ள வட்டி விகிதம் 4% வரை குறையக்கூடும். புதிய நிதியாண்டு விதிகள் மாறலாம்; வங்கியில் நடப்பு விகிதத்தை உறுதிப்படுத்தவும்.</p>
+
+<h3 data-ta="தேவையான ஆவணங்கள்" data-en="Documents Required">தேவையான ஆவணங்கள்</h3>
+<ul>
+<li>ஆதார் அட்டை மற்றும் புகைப்படம்</li>
+<li>வங்கி கணக்கு விவரம்</li>
+<li data-ta="சிட்டா, அடங்கல், பட்டா அல்லது வங்கி ஏற்கும் விவசாயச் சான்று."
+data-en="Chitta, Adangal, Patta or other accepted cultivation proof.">சிட்டா, அடங்கல், பட்டா அல்லது வங்கி ஏற்கும் விவசாயச் சான்று.</li>
+<li data-ta="குத்தகை / பங்கு விவசாய ஆவணங்கள், பொருந்தினால்."
+data-en="Lease or sharecropping documents, where applicable.">குத்தகை / பங்கு விவசாய ஆவணங்கள், பொருந்தினால்.</li>
+</ul>
+<a class="apply" href="https://rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13524" target="_blank" rel="noopener">RBI KCC Guidelines ↗</a>
+</div>
+</details>
+
+<!-- 8 IRRIGATION -->
+<details class="loan-card">
+<summary><span class="loan-icon">💧</span>
+<span data-ta="8. பாசன வசதி / கிணறு / டிரிப் கடன்" data-en="8. Irrigation and Water Facility Loan">8. பாசன வசதி / கிணறு / டிரிப் கடன்</span></summary>
+<div class="details">
+<h3 data-ta="கடன் எதற்காக?" data-en="Purpose">கடன் எதற்காக?</h3>
+<p data-ta="பம்ப்செட், மின்மோட்டார், குழாய், சொட்டு நீர்ப்பாசனம், தெளிப்பு நீர்ப்பாசனம், நீர்த்தேக்கத் தொட்டி மற்றும் நில மேம்பாட்டுப் பணிகளுக்கு."
+data-en="For pump sets, electric motors, pipelines, drip and sprinkler irrigation, water tanks and land development.">பம்ப்செட், மின்மோட்டார், குழாய், சொட்டு நீர்ப்பாசனம், தெளிப்பு நீர்ப்பாசனம், நீர்த்தேக்கத் தொட்டி மற்றும் நில மேம்பாட்டுப் பணிகளுக்கு.</p>
+
+<h3 data-ta="எந்த வங்கிகளில்?" data-en="Banks">எந்த வங்கிகளில்?</h3>
+<p>Indian Bank, SBI, Canara Bank, Indian Overseas Bank, Regional Rural Banks, Cooperative Banks மற்றும் PCARDB போன்ற நிறுவனங்களில் விவசாய முதலீட்டுக் கடன் பற்றி விசாரிக்கலாம்.</p>
+
+<h3 data-ta="யார் தகுதியானவர்கள்?" data-en="Eligibility">யார் தகுதியானவர்கள்?</h3>
+<ul>
+<li data-ta="விவசாய நிலம் உள்ளவர்கள் அல்லது வங்கி ஏற்கும் சட்டபூர்வ குத்தகை / பயன்பாட்டு உரிமை கொண்டவர்கள்."
+data-en="Applicants owning farmland or holding accepted legal lease/use rights.">விவசாய நிலம் உள்ளவர்கள் அல்லது வங்கி ஏற்கும் சட்டபூர்வ குத்தகை / பயன்பாட்டு உரிமை கொண்டவர்கள்.</li>
+<li data-ta="நீர்வள மற்றும் உள்ளூர் அனுமதி நிபந்தனைகளைப் பூர்த்தி செய்பவர்கள்."
+data-en="Applicants meeting water-resource and local permission conditions.">நீர்வள மற்றும் உள்ளூர் அனுமதி நிபந்தனைகளைப் பூர்த்தி செய்பவர்கள்.</li>
+</ul>
+
+<h3 data-ta="வயது / கடன் / மானியம்" data-en="Age / Loan / Subsidy">வயது / கடன் / மானியம்</h3>
+<p data-ta="வயது மற்றும் கடன் தொகை வங்கியின் விதிகளுக்கு உட்பட்டது. டிரிப் மற்றும் ஸ்பிரிங்க்ளர் அமைப்புகளுக்கு வேளாண்மை / தோட்டக்கலைத் துறை மூலம் குறிப்பிட்ட பயிர்கள் மற்றும் விவசாயி பிரிவுகளுக்கு மானியம் கிடைக்கலாம். கிணறு தோண்டுதல் அல்லது மோட்டார் வாங்குவதற்கு தானாகவே மானியம் கிடைக்கும் என்று கருதக்கூடாது."
+data-en="Age and loan amount depend on bank rules. Agriculture or Horticulture Departments may provide subsidy for drip and sprinkler systems for specified crops and farmer categories. Do not assume that well digging or motor purchase automatically qualifies for subsidy.">வயது மற்றும் கடன் தொகை வங்கியின் விதிகளுக்கு உட்பட்டது. டிரிப் மற்றும் ஸ்பிரிங்க்ளர் அமைப்புகளுக்கு வேளாண்மை / தோட்டக்கலைத் துறை மூலம் குறிப்பிட்ட பயிர்கள் மற்றும் விவசாயி பிரிவுகளுக்கு மானியம் கிடைக்கலாம். கிணறு தோண்டுதல் அல்லது மோட்டார் வாங்குவதற்கு தானாகவே மானியம் கிடைக்கும் என்று கருதக்கூடாது.</p>
+
+<h3 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h3>
+<ul>
+<li>ஆதார், புகைப்படம், வங்கி கணக்கு</li>
+<li>பட்டா / சிட்டா / அடங்கல்</li>
+<li data-ta="மோட்டார் / பாசன உபகரணங்களின் விலைப்பட்டியல்."
+data-en="Quotation for pump or irrigation equipment.">மோட்டார் / பாசன உபகரணங்களின் விலைப்பட்டியல்.</li>
+<li data-ta="நீர் ஆதாரம் மற்றும் தேவையான அனுமதி விவரங்கள்."
+data-en="Water-source details and required permissions.">நீர் ஆதாரம் மற்றும் தேவையான அனுமதி விவரங்கள்.</li>
+</ul>
+<a class="apply" href="https://www.tnagrisnet.tn.gov.in/" target="_blank" rel="noopener">Tamil Nadu Agriculture Portal ↗</a>
+</div>
+</details>
+
+<!-- 9 LAND PURCHASE -->
+<details class="loan-card">
+<summary><span class="loan-icon">🌱</span>
+<span data-ta="9. விவசாய நிலம் வாங்கும் கடன்" data-en="9. Agricultural Land Purchase Loan">9. விவசாய நிலம் வாங்கும் கடன்</span></summary>
+<div class="details">
+<h3 data-ta="கடன் எதற்காக?" data-en="Purpose">கடன் எதற்காக?</h3>
+<p data-ta="விவசாய நிலம் வாங்குதல், சிறு நிலங்களை ஒருங்கிணைத்தல் மற்றும் விவசாய உற்பத்தியை மேம்படுத்துதல்."
+data-en="To purchase agricultural land, consolidate small holdings and improve farm production.">விவசாய நிலம் வாங்குதல், சிறு நிலங்களை ஒருங்கிணைத்தல் மற்றும் விவசாய உற்பத்தியை மேம்படுத்துதல்.</p>
+
+<h3 data-ta="எந்த வங்கிகளில்?" data-en="Banks">எந்த வங்கிகளில்?</h3>
+<p>Indian Bank, SBI, Canara Bank, Indian Overseas Bank, Regional Rural Banks மற்றும் சில Cooperative / Agriculture Development Banks ஆகியவற்றில் Land Purchase Scheme உள்ளதா என்று விசாரிக்கலாம்.</p>
+
+<h3 data-ta="யார் தகுதியானவர்கள்?" data-en="Eligibility">யார் தகுதியானவர்கள்?</h3>
+<ul>
+<li data-ta="விவசாய நிலம் வாங்க விரும்பும் சிறு மற்றும் குறு விவசாயிகள்."
+data-en="Small and marginal farmers seeking to purchase agricultural land.">விவசாய நிலம் வாங்க விரும்பும் சிறு மற்றும் குறு விவசாயிகள்.</li>
+<li data-ta="வங்கியின் திட்ட விதிகளில் கூறப்பட்ட நில அளவு மற்றும் வருமானத் தகுதி கொண்டவர்கள்."
+data-en="Applicants meeting the bank's landholding and income conditions.">வங்கியின் திட்ட விதிகளில் கூறப்பட்ட நில அளவு மற்றும் வருமானத் தகுதி கொண்டவர்கள்.</li>
+<li data-ta="நிலத்தின் உரிமை ஆவணங்கள் சட்டப்படி சரிபார்க்கக்கூடியதாக இருக்க வேண்டும்."
+data-en="The land title documents must be legally verifiable.">நிலத்தின் உரிமை ஆவணங்கள் சட்டப்படி சரிபார்க்கக்கூடியதாக இருக்க வேண்டும்.</li>
+</ul>
+
+<h3 data-ta="வயது / கடன் தொகை / வட்டி" data-en="Age / Loan / Interest">வயது / கடன் தொகை / வட்டி</h3>
+<p data-ta="வயது, கடன் தொகை, முன்பணம் மற்றும் திருப்பிச் செலுத்தும் காலம் வங்கியின் குறிப்பிட்ட Land Purchase Scheme மற்றும் விண்ணப்பதாரரின் தகுதியைப் பொறுத்தது. எல்லா வங்கிகளிலும் ஒரே அளவு கடன் கிடையாது."
+data-en="Age, loan amount, margin and repayment period depend on the bank's specific Land Purchase Scheme and applicant eligibility. Limits are not identical across banks.">வயது, கடன் தொகை, முன்பணம் மற்றும் திருப்பிச் செலுத்தும் காலம் வங்கியின் குறிப்பிட்ட Land Purchase Scheme மற்றும் விண்ணப்பதாரரின் தகுதியைப் பொறுத்தது. எல்லா வங்கிகளிலும் ஒரே அளவு கடன் கிடையாது.</p>
+
+<h3 data-ta="மானியம்" data-en="Subsidy">மானியம்</h3>
+<p data-ta="நிலம் வாங்கும் கடனுக்கு அனைவருக்கும் பொதுவான மானியம் இல்லை. குறிப்பிட்ட அரசு திட்டம் அறிவிக்கப்பட்டு தகுதி இருந்தால் மட்டுமே உதவி கிடைக்கும். நிலம் வாங்குவதற்கு முன் வங்கியில் சட்ட ஆவணச் சரிபார்ப்பு மற்றும் கடன் தகுதியை உறுதிப்படுத்தவும்."
+data-en="There is no universal subsidy for agricultural land purchase loans. Assistance is available only if a specific government scheme is open and the applicant qualifies. Confirm legal title checks and loan eligibility with the bank before purchase.">நிலம் வாங்கும் கடனுக்கு அனைவருக்கும் பொதுவான மானியம் இல்லை. குறிப்பிட்ட அரசு திட்டம் அறிவிக்கப்பட்டு தகுதி இருந்தால் மட்டுமே உதவி கிடைக்கும். நிலம் வாங்குவதற்கு முன் வங்கியில் சட்ட ஆவணச் சரிபார்ப்பு மற்றும் கடன் தகுதியை உறுதிப்படுத்தவும்.</p>
+
+<h3 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h3>
+<ul>
+<li>ஆதார், புகைப்படம், வங்கி கணக்கு</li>
+<li>தற்போதைய நில ஆவணங்கள் மற்றும் பட்டா விவரம்</li>
+<li data-ta="வாங்க விரும்பும் நிலத்தின் விற்பனை ஒப்பந்தம் / விலை விவரம்."
+data-en="Sale agreement or price details of the proposed land.">வாங்க விரும்பும் நிலத்தின் விற்பனை ஒப்பந்தம் / விலை விவரம்.</li>
+<li data-ta="வருமானம், ஏற்கனவே உள்ள கடன் விவரம் மற்றும் வங்கி கேட்கும் ஆவணங்கள்."
+data-en="Income, existing loan details and other bank-requested documents.">வருமானம், ஏற்கனவே உள்ள கடன் விவரம் மற்றும் வங்கி கேட்கும் ஆவணங்கள்.</li>
+</ul>
+</div>
+</details>
+
+<!-- 10 FEED -->
+<details class="loan-card">
+<summary><span class="loan-icon">🌿</span>
+<span data-ta="10. கால்நடை தீவனம் மற்றும் பராமரிப்புக் கடன்" data-en="10. Animal Feed and Maintenance Loan">10. கால்நடை தீவனம் மற்றும் பராமரிப்புக் கடன்</span></summary>
+<div class="details">
+<h3 data-ta="கடன் எதற்காக?" data-en="Purpose">கடன் எதற்காக?</h3>
+<p data-ta="மாடு, ஆடு, செம்மறி ஆடு மற்றும் கோழிகளுக்கான தீவனம், மருந்து, தடுப்பூசி, பராமரிப்பு மற்றும் அன்றாட செலவுகளுக்கு."
+data-en="For feed, medicines, vaccination, care and day-to-day expenses for cattle, goats, sheep and poultry.">மாடு, ஆடு, செம்மறி ஆடு மற்றும் கோழிகளுக்கான தீவனம், மருந்து, தடுப்பூசி, பராமரிப்பு மற்றும் அன்றாட செலவுகளுக்கு.</p>
+
+<h3 data-ta="எந்த வங்கிகளில்?" data-en="Banks">எந்த வங்கிகளில்?</h3>
+<p>Public Sector Banks, Private Sector Banks, Regional Rural Banks மற்றும் Cooperative Banks மூலம் Animal Husbandry KCC அல்லது working capital loan பற்றி விசாரிக்கலாம்.</p>
+
+<h3 data-ta="யார் தகுதியானவர்கள்?" data-en="Eligibility">யார் தகுதியானவர்கள்?</h3>
+<ul>
+<li data-ta="கால்நடை அல்லது கோழி வளர்ப்பில் ஈடுபட்டுள்ளவர்கள்."
+data-en="People engaged in livestock or poultry rearing.">கால்நடை அல்லது கோழி வளர்ப்பில் ஈடுபட்டுள்ளவர்கள்.</li>
+<li data-ta="விலங்குகள் / பறவைகள் சொந்தமாக அல்லது சட்டப்படி பராமரிப்பில் உள்ளவர்கள்."
+data-en="Applicants owning or legally maintaining the animals or birds.">விலங்குகள் / பறவைகள் சொந்தமாக அல்லது சட்டப்படி பராமரிப்பில் உள்ளவர்கள்.</li>
+<li data-ta="வங்கி கோரும் கால்நடை விவரங்கள் மற்றும் வருமான மதிப்பீட்டை வழங்குபவர்கள்."
+data-en="Applicants able to provide livestock details and income estimates required by the bank.">வங்கி கோரும் கால்நடை விவரங்கள் மற்றும் வருமான மதிப்பீட்டை வழங்குபவர்கள்.</li>
+</ul>
+
+<h3 data-ta="வயது / கடன் / வட்டி சலுகை" data-en="Age / Loan / Interest Benefit">வயது / கடன் / வட்டி சலுகை</h3>
+<p data-ta="வயது மற்றும் கடன் வரம்பு வங்கியின் விதிகளுக்கு உட்பட்டது. தகுதியுள்ள கால்நடை வளர்ப்பாளர்கள் KCC வழியாக செயல்பாட்டு மூலதனக் கடன் பெறலாம். 2025–26 நிதியாண்டு RBI அறிவிப்பில் கால்நடை மற்றும் பால் பண்ணை உள்ளிட்ட தொடர்புடைய செயல்பாடுகளுக்கான வட்டி சலுகை வரம்புகள் குறிப்பிடப்பட்டுள்ளன. நடப்பு நிதியாண்டின் விதிகளை வங்கியில் சரிபார்க்கவும்."
+data-en="Age and credit limits depend on bank rules. Eligible livestock farmers may obtain working-capital finance through KCC. RBI's FY 2025–26 notification includes interest-benefit limits for allied activities such as animal husbandry and dairy. Confirm the current financial-year rules with the bank.">வயது மற்றும் கடன் வரம்பு வங்கியின் விதிகளுக்கு உட்பட்டது. தகுதியுள்ள கால்நடை வளர்ப்பாளர்கள் KCC வழியாக செயல்பாட்டு மூலதனக் கடன் பெறலாம். 2025–26 நிதியாண்டு RBI அறிவிப்பில் கால்நடை மற்றும் பால் பண்ணை உள்ளிட்ட தொடர்புடைய செயல்பாடுகளுக்கான வட்டி சலுகை வரம்புகள் குறிப்பிடப்பட்டுள்ளன. நடப்பு நிதியாண்டின் விதிகளை வங்கியில் சரிபார்க்கவும்.</p>
+
+<h3 data-ta="மானியம்" data-en="Subsidy">மானியம்</h3>
+<p data-ta="தீவனம் வாங்கும் ஒவ்வொரு விவசாயிக்கும் பொதுவான மானியம் கிடையாது. அரசு குறிப்பிட்ட காலத்திற்கு அறிவிக்கும் கால்நடை வளர்ப்பு அல்லது தீவனத் திட்டங்களில் தகுதி இருந்தால் மட்டுமே உதவி கிடைக்கும்."
+data-en="There is no universal feed subsidy for every farmer. Assistance is available only under specific livestock or feed schemes when open and when the applicant qualifies.">தீவனம் வாங்கும் ஒவ்வொரு விவசாயிக்கும் பொதுவான மானியம் கிடையாது. அரசு குறிப்பிட்ட காலத்திற்கு அறிவிக்கும் கால்நடை வளர்ப்பு அல்லது தீவனத் திட்டங்களில் தகுதி இருந்தால் மட்டுமே உதவி கிடைக்கும்.</p>
+
+<h3 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h3>
+<ul>
+<li>ஆதார், புகைப்படம், வங்கி கணக்கு</li>
+<li data-ta="கால்நடை விவரங்கள் / கால்நடை மருத்துவர் சான்று, தேவைப்பட்டால்."
+data-en="Livestock details or veterinary certificate, if required.">கால்நடை விவரங்கள் / கால்நடை மருத்துவர் சான்று, தேவைப்பட்டால்.</li>
+<li data-ta="தீவனச் செலவு மதிப்பீடு அல்லது விலைப்பட்டியல்."
+data-en="Feed expense estimate or quotation.">தீவனச் செலவு மதிப்பீடு அல்லது விலைப்பட்டியல்.</li>
+<li data-ta="பண்ணை / கொட்டகை விவரம் மற்றும் வங்கி கேட்கும் கூடுதல் ஆவணங்கள்."
+data-en="Farm or shed details and other documents requested by the bank.">பண்ணை / கொட்டகை விவரம் மற்றும் வங்கி கேட்கும் கூடுதல் ஆவணங்கள்.</li>
+</ul>
+<a class="apply" href="https://rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13524" target="_blank" rel="noopener">RBI KCC Guidelines ↗</a>
+</div>
+</details>
+
+<div class="notice">
+<strong data-ta="விண்ணப்பிக்கும் முன் கவனிக்கவும்" data-en="Before Applying">விண்ணப்பிக்கும் முன் கவனிக்கவும்</strong>
+<p data-ta="உங்கள் அருகிலுள்ள வங்கி கிளை, தொடக்க வேளாண்மை கூட்டுறவு கடன் சங்கம் (PACCS), வட்டார வேளாண்மை அலுவலகம் அல்லது கால்நடை பராமரிப்புத் துறையில் திட்டத்தின் தற்போதைய நிலையை உறுதிப்படுத்துங்கள். கடன் ஒப்புதல் வங்கியின் சரிபார்ப்பு மற்றும் தகுதியைப் பொறுத்தது."
+data-en="Confirm current scheme availability with your nearest bank branch, Primary Agricultural Cooperative Credit Society (PACCS), block agriculture office or Animal Husbandry Department. Loan approval depends on bank verification and eligibility.">
+உங்கள் அருகிலுள்ள வங்கி கிளை, தொடக்க வேளாண்மை கூட்டுறவு கடன் சங்கம் (PACCS), வட்டார வேளாண்மை அலுவலகம் அல்லது கால்நடை பராமரிப்புத் துறையில் திட்டத்தின் தற்போதைய நிலையை உறுதிப்படுத்துங்கள். கடன் ஒப்புதல் வங்கியின் சரிபார்ப்பு மற்றும் தகுதியைப் பொறுத்தது.
+</p>
 </div>
 
 </main>
 
 <footer>
-    <h3>Aara Farmers 🌾</h3>
-    <p>விவசாயிகளுக்கு உதவும் ஒரு தகவல் தளம்</p>
-    <p>© 2026 Aara Farmers</p>
+ <h3>Aara Farmers 🌾</h3>
+ <p data-ta="விவசாயிகளுக்கு உதவும் தகவல் தளம்"
+ data-en="Information platform supporting farmers">விவசாயிகளுக்கு உதவும் தகவல் தளம்</p>
+ <p>© 2026 Aara Farmers. All Rights Reserved.</p>
 </footer>
 
 <script>
 let currentLanguage = "ta";
 
-function toggleLanguage() {
-    currentLanguage = currentLanguage === "ta" ? "en" : "ta";
+function toggleLanguage(){
+ const elements = document.querySelectorAll("[data-ta][data-en]");
+ currentLanguage = currentLanguage === "ta" ? "en" : "ta";
 
-    document.documentElement.lang = currentLanguage;
+ elements.forEach(element=>{
+   element.textContent = element.getAttribute(
+     currentLanguage === "ta" ? "data-ta" : "data-en"
+   );
+ });
 
-    document.getElementById("subtitle").textContent =
-        currentLanguage === "ta"
-        ? "விவசாயிகளுக்கான கடன் தகவல்கள்"
-        : "Loan Information for Farmers";
-
-    document.getElementById("mainTitle").textContent =
-        currentLanguage === "ta"
-        ? "விவசாயக் கடன் திட்டங்கள்"
-        : "Agricultural Loan Options";
-
-    document.getElementById("introText").textContent =
-        currentLanguage === "ta"
-        ? "உங்களுக்குத் தேவையான கடன் வகையைத் தேர்ந்தெடுத்து அதன் விவரங்களைத் தெரிந்துகொள்ளுங்கள்."
-        : "Choose a loan category to learn more about it.";
-
-    document.getElementById("back").textContent =
-        currentLanguage === "ta"
-        ? "⬅ முகப்புக்குச் செல்ல"
-        : "⬅ Back to Home";
-
-    document.getElementById("langBtn").textContent =
-        currentLanguage === "ta"
-        ? "English"
-        : "தமிழ்";
-
-    document.querySelectorAll("[data-ta]").forEach(element => {
-        element.textContent =
-            element.getAttribute("data-" + currentLanguage);
-    });
+ document.documentElement.lang = currentLanguage;
+ document.getElementById("langButton").textContent =
+   currentLanguage === "ta" ? "English" : "தமிழ்";
 }
 </script>
 
