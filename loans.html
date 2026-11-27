@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aara Farmers - Loan Information</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef7e9;
+    color: #24452b;
+}
+
+header {
+    background: linear-gradient(120deg, #14532d, #43a047);
+    color: white;
+    text-align: center;
+    padding: 28px 12px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+nav {
+    background: white;
+    padding: 13px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: #17652e;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.lang-btn {
+    background: #17652e;
+    color: white;
+    border: none;
+    padding: 10px 17px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.intro {
+    text-align: center;
+    padding: 30px 15px 15px;
+}
+
+.intro h2 {
+    color: #17652e;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    line-height: 1.6;
+    color: #526b55;
+}
+
+.container {
+    max-width: 950px;
+    margin: auto;
+    padding: 10px 15px 40px;
+}
+
+.loan-card {
+    background: white;
+    margin: 22px 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 17px #00000015;
+    border: 1px solid #dcebd8;
+    transition: 0.25s;
+}
+
+.loan-card:hover {
+    transform: translateY(-3px);
+}
+
+.poster {
+    min-height: 150px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    background: linear-gradient(110deg, #17652e, #65a94e);
+}
+
+.loan-card:nth-child(2) .poster {
+    background: linear-gradient(110deg, #80501c, #c18a3c);
+}
+
+.loan-card:nth-child(3) .poster {
+    background: linear-gradient(110deg, #315b83, #5d9ac4);
+}
+
+.loan-card:nth-child(4) .poster {
+    background: linear-gradient(110deg, #496c32, #91ad4c);
+}
+
+.loan-card:nth-child(5) .poster {
+    background: linear-gradient(110deg, #72522f, #b58a52);
+}
+
+.loan-card:nth-child(6) .poster {
+    background: linear-gradient(110deg, #276a62, #58a99a);
+}
+
+.loan-card:nth-child(7) .poster {
+    background: linear-gradient(110deg, #654a86, #9b7cba);
+}
+
+.loan-card:nth-child(8) .poster {
+    background: linear-gradient(110deg, #9b5c25, #d39a4e);
+}
+
+.loan-card:nth-child(9) .poster {
+    background: linear-gradient(110deg, #286d42, #6da96d);
+}
+
+.loan-card:nth-child(10) .poster {
+    background: linear-gradient(110deg, #315c48, #70a77a);
+}
+
+.emoji {
+    font-size: 60px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.poster h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.poster p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.loan-content {
+    padding: 18px 22px;
+}
+
+.loan-content summary {
+    color: #17652e;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    list-style-position: inside;
+}
+
+.details {
+    padding-top: 15px;
+    line-height: 1.8;
+    color: #344d38;
+}
+
+.details h4 {
+    color: #17652e;
+    margin: 12px 0 4px;
+}
+
+.details ul {
+    padding-left: 22px;
+}
+
+.notice {
+    background: #fff7df;
+    border-left: 5px solid #e2a629;
+    border-radius: 7px;
+    padding: 13px;
+    margin-top: 14px;
+    font-size: 14px;
+}
+
+footer {
+    background: #14532d;
+    color: white;
+    text-align: center;
+    padding: 22px 12px;
+    line-height: 1.8;
+}
+
+@media(max-width:600px) {
+    header h1 {
+        font-size: 26px;
+    }
+
+    .poster {
+        padding: 17px 12px;
+        gap: 10px;
+    }
+
+    .emoji {
+        font-size: 45px;
+        min-width: 55px;
+    }
+
+    .poster h3 {
+        font-size: 18px;
+    }
+
+    .poster p {
+        font-size: 13px;
+    }
+
+    .loan-content {
+        padding: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Aara Farmers 🌾</h1>
+    <p id="subtitle">விவசாயிகளுக்கான கடன் தகவல்கள்</p>
+</header>
+
+<nav>
+    <a href="index.html" id="back">⬅ முகப்புக்குச் செல்ல</a>
+    <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">
+        English
+    </button>
+</nav>
+
+<section class="intro">
+    <h2 id="mainTitle">விவசாயக் கடன் திட்டங்கள்</h2>
+    <p id="introText">
+        உங்களுக்குத் தேவையான கடன் வகையைத் தேர்ந்தெடுத்து
+        அதன் விவரங்களைத் தெரிந்துகொள்ளுங்கள்.
+    </p>
+</section>
+
+<main class="container">
+
+<!-- 1. மாடு வாங்கும் கடன் -->
+<div class="loan-card">
+    <div class="poster">
+        <div class="emoji">🐄</div>
+        <div>
+            <h3 data-ta="மாடு வாங்கும் கடன்" data-en="Dairy Cow Purchase Loan">மாடு வாங்கும் கடன்</h3>
+            <p data-ta="பால் பண்ணை மற்றும் கால்நடை வளர்ப்புக்கான நிதி உதவி"
+               data-en="Financial support for dairy farming">
+               பால் பண்ணை மற்றும் கால்நடை வளர்ப்புக்கான நிதி உதவி
+            </p>
+        </div>
+    </div>
+    <div class="loan-content">
+        <details>
+            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
+            <div class="details">
+                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
+                <p data-ta="பால் தரும் மாடு அல்லது எருமை வாங்கி பால் பண்ணை தொடங்க அல்லது விரிவுபடுத்த."
+                   data-en="To purchase milch cows or buffaloes and start or expand a dairy farm."></p>
+                <h4 data-ta="யார் விண்ணப்பிக்கலாம்?" data-en="Eligibility">யார் விண்ணப்பிக்கலாம்?</h4>
+                <p data-ta="கால்நடை வளர்க்க இடம், பராமரிப்பு வசதி மற்றும் வங்கியின் தகுதி நிபந்தனைகளைப் பூர்த்தி செய்பவர்கள்."
+                   data-en="Applicants who have suitable space and meet bank eligibility conditions."></p>
+                <h4 data-ta="தேவையான ஆவணங்கள்" data-en="Documents">தேவையான ஆவணங்கள்</h4>
+                <ul>
+                    <li data-ta="ஆதார் அட்டை" data-en="Aadhaar card">ஆதார் அட்டை</li>
+                    <li data-ta="முகவரிச் சான்று" data-en="Address proof">முகவரிச் சான்று</li>
+                    <li data-ta="வங்கிக் கணக்கு விவரம்" data-en="Bank account details">வங்கிக் கணக்கு விவரம்</li>
+                    <li data-ta="கால்நடை வளர்ப்புத் திட்ட விவரம்" data-en="Dairy project details">கால்நடை வளர்ப்புத் திட்ட விவரம்</li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- 2. ஆடு வளர்ப்புக் கடன் -->
+<div class="loan-card">
+    <div class="poster">
+        <div class="emoji">🐐</div>
+        <div>
+            <h3 data-ta="ஆடு மற்றும் செம்மறியாடு கடன்" data-en="Goat and Sheep Loan">ஆடு மற்றும் செம்மறியாடு கடன்</h3>
+            <p data-ta="ஆடு வளர்ப்புப் பண்ணை தொடங்குவதற்கான நிதி உதவி"
+               data-en="Financial support to start a goat or sheep farm"></p>
+        </div>
+    </div>
+    <div class="loan-content">
+        <details>
+            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
+            <div class="details">
+                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
+                <p data-ta="ஆடுகள் வாங்குதல், கொட்டகை அமைத்தல் மற்றும் தீவனச் செலவுகளுக்கு."
+                   data-en="For purchasing goats, building sheds and feed expenses."></p>
+                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
+                <p data-ta="ஆடு வளர்க்க இடவசதி மற்றும் பராமரிப்பு ஏற்பாடுகள் கொண்டவர்கள்."
+                   data-en="Applicants with suitable space and facilities to rear goats."></p>
+                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
+                <ul>
+                    <li data-ta="ஆதார் மற்றும் முகவரிச் சான்று" data-en="Aadhaar and address proof"></li>
+                    <li data-ta="வங்கிக் கணக்கு விவரம்" data-en="Bank account details"></li>
+                    <li data-ta="ஆடு வளர்ப்புத் திட்டம்" data-en="Goat farming project plan"></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- 3. கோழிப் பண்ணைக் கடன் -->
+<div class="loan-card">
+    <div class="poster">
+        <div class="emoji">🐔</div>
+        <div>
+            <h3 data-ta="கோழிப் பண்ணைக் கடன்" data-en="Poultry Farm Loan">கோழிப் பண்ணைக் கடன்</h3>
+            <p data-ta="கோழி வளர்ப்பு மற்றும் பண்ணை அமைப்பதற்கான நிதி உதவி"
+               data-en="Financial support for poultry farming"></p>
+        </div>
+    </div>
+    <div class="loan-content">
+        <details>
+            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
+            <div class="details">
+                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
+                <p data-ta="கோழிக் குஞ்சுகள், கூண்டு, தீவனம் மற்றும் பண்ணை அமைப்பதற்கு."
+                   data-en="For chicks, poultry sheds, feed and farm setup."></p>
+                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
+                <p data-ta="கோழிப் பண்ணை நடத்துவதற்கான இடம் மற்றும் பராமரிப்பு வசதி கொண்டவர்கள்."
+                   data-en="Applicants with suitable space and facilities for poultry farming."></p>
+                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
+                <ul>
+                    <li data-ta="அடையாளச் சான்று" data-en="Identity proof"></li>
+                    <li data-ta="முகவரிச் சான்று" data-en="Address proof"></li>
+                    <li data-ta="பண்ணைத் திட்ட விவரம்" data-en="Poultry project details"></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- 4. டிராக்டர் கடன் -->
+<div class="loan-card">
+    <div class="poster">
+        <div class="emoji">🚜</div>
+        <div>
+            <h3 data-ta="டிராக்டர் வாங்கும் கடன்" data-en="Tractor Purchase Loan">டிராக்டர் வாங்கும் கடன்</h3>
+            <p data-ta="விவசாயப் பணிகளுக்குத் தேவையான டிராக்டர் வாங்க"
+               data-en="Finance to purchase a tractor for farm work"></p>
+        </div>
+    </div>
+    <div class="loan-content">
+        <details>
+            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
+            <div class="details">
+                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
+                <p data-ta="நிலத்தை உழுதல், சரக்கு எடுத்துச் செல்லுதல் போன்ற விவசாயப் பணிகளுக்குத் டிராக்டர் வாங்க."
+                   data-en="To purchase a tractor for ploughing, transport and other farm activities."></p>
+                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
+                <p data-ta="விவசாய நிலம் அல்லது விவசாயப் பயன்பாட்டிற்கான திட்டம் கொண்டவர்கள். வங்கியின் நிபந்தனைகள் பொருந்தும்."
+                   data-en="Farmers with agricultural land or a suitable farm-use plan, subject to bank conditions."></p>
+                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
+                <ul>
+                    <li data-ta="ஆதார் அட்டை" data-en="Aadhaar card"></li>
+                    <li data-ta="நில ஆவணங்கள்" data-en="Land records"></li>
+                    <li data-ta="டிராக்டர் விலை மதிப்பீடு" data-en="Tractor quotation"></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- 5. விவசாய இயந்திரக் கடன் -->
+<div class="loan-card">
+    <div class="poster">
+        <div class="emoji">⚙️</div>
+        <div>
+            <h3 data-ta="விவசாய இயந்திரக் கடன்" data-en="Farm Machinery Loan">விவசாய இயந்திரக் கடன்</h3>
+            <p data-ta="பவர் டில்லர், அறுவடை இயந்திரம் மற்றும் கருவிகள் வாங்க"
+               data-en="Finance for tillers, harvesters and farm equipment"></p>
+        </div>
+    </div>
+    <div class="loan-content">
+        <details>
+            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
+            <div class="details">
+                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
+                <p data-ta="பவர் டில்லர், பவர் வீடர், விதைப்பு மற்றும் அறுவடை இயந்திரங்கள் வாங்க."
+                   data-en="To purchase power tillers, power weeders, seeders and harvesters."></p>
+                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
+                <p data-ta="விவசாயப் பயன்பாட்டிற்காக இயந்திரம் வாங்க விரும்பும் தகுதியான விவசாயிகள்."
+                   data-en="Eligible farmers purchasing machinery for agricultural use."></p>
+                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
+                <ul>
+                    <li data-ta="அடையாள மற்றும் முகவரிச் சான்று" data-en="Identity and address proof"></li>
+                    <li data-ta="இயந்திர விலை மதிப்பீடு" data-en="Machinery quotation"></li>
+                    <li data-ta="விவசாய நில விவரம்" data-en="Farm land details"></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- 6. மீன் வளர்ப்புக் கடன் -->
+<div class="loan-card">
+    <div class="poster">
+        <div class="emoji">🐟</div>
+        <div>
+            <h3 data-ta="மீன் வளர்ப்புக் கடன்" data-en="Fisheries Loan">மீன் வளர்ப்புக் கடன்</h3>
+            <p data-ta="மீன் வளர்ப்பு மற்றும் மீன்வளத் தொழிலுக்கான நிதி உதவி"
+               data-en="Financial support for fish farming and fisheries"></p>
+        </div>
+    </div>
+    <div class="loan-content">
+        <details>
+            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
+            <div class="details">
+                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
+                <p data-ta="மீன் குளம் அமைத்தல், மீன் குஞ்சுகள் வாங்குதல், தீவனம் மற்றும் பராமரிப்புச் செலவுகளுக்கு."
+                   data-en="For fish ponds, fingerlings, feed and maintenance expenses."></p>
+                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
+                <p data-ta="மீன் வளர்ப்புக்கான நீர்நிலை அல்லது தேவையான வசதிகள் கொண்டவர்கள்."
+                   data-en="Applicants with suitable water resources or fish farming facilities."></p>
+                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
+                <ul>
+                    <li data-ta="அடையாளச் சான்று" data-en="Identity proof"></li>
+                    <li data-ta="நிலம் அல்லது குத்தகை விவரம்" data-en="Land or lease details"></li>
+                    <li data-ta="மீன் வளர்ப்புத் திட்டம்" data-en="Fish farming project plan"></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- 7. பயிர்க் கடன் -->
+<div class="loan-card">
+    <div class="poster">
+        <div class="emoji">🌾</div>
+        <div>
+            <h3 data-ta="பயிர்க் கடன் - KCC" data-en="Crop Loan - KCC">பயிர்க் கடன் - KCC</h3>
+            <p data-ta="விதை, உரம் மற்றும் சாகுபடிச் செலவுகளுக்கான கடன்"
+               data-en="Credit for seeds, fertilizers and cultivation expenses"></p>
+        </div>
+    </div>
+    <div class="loan-content">
+        <details>
+            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
+            <div class="details">
+                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
+                <p data-ta="விதை, உரம், பூச்சிக்கொல்லி, தொழிலாளர் செலவு மற்றும் பிற பருவகால சாகுபடிச் செலவுகளுக்கு."
+                   data-en="For seeds, fertilizers, pesticides, labour and seasonal cultivation expenses."></p>
+                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
+                <p data-ta="விவசாயிகள் மற்றும் வங்கி விதிகளின்படி தகுதியுள்ள குத்தகை விவசாயிகள்."
+                   data-en="Farmers and eligible tenant cultivators as per bank rules."></p>
+                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
+                <ul>
+                    <li data-ta="ஆதார் அட்டை" data-en="Aadhaar card"></li>
+                    <li data-ta="நில ஆவணங்கள் அல்லது குத்தகை விவரம்" data-en="Land records or lease details"></li>
+                    <li data-ta="வங்கிக் கணக்கு விவரம்" data-en="Bank account details"></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- 8. நீர்ப்பாசனக் கடன் -->
+<div class="loan-card">
+    <div class="poster">
+        <div class="emoji">💧</div>
+        <div>
+            <h3 data-ta="நீர்ப்பாசன வசதிக் கடன்" data-en="Irrigation Loan">நீர்ப்பாசன வசதிக் கடன்</h3>
+            <p data-ta="பம்ப் செட், குழாய் மற்றும் நீர்ப்பாசன வசதிகள் அமைக்க"
+               data-en="Finance for pumps, pipes and irrigation facilities"></p>
+        </div>
+    </div>
+    <div class="loan-content">
+        <details>
+            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
+            <div class="details">
+                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
+                <p data-ta="மோட்டார் பம்ப், சொட்டுநீர்ப் பாசனம், குழாய்கள் மற்றும் நீர் சேமிப்பு வசதிகளுக்கு."
+                   data-en="For motor pumps, drip irrigation, pipes and water storage facilities."></p>
+                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
+                <p data-ta="விவசாய நிலம் மற்றும் தேவையான நீர்ப்பாசனத் திட்டம் கொண்டவர்கள்."
+                   data-en="Farmers with agricultural land and a suitable irrigation plan."></p>
+                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
+                <ul>
+                    <li data-ta="நில ஆவணங்கள்" data-en="Land records"></li>
+                    <li data-ta="அடையாளச் சான்று" data-en="Identity proof"></li>
+                    <li data-ta="கருவிகளின் விலை மதிப்பீடு" data-en="Equipment quotation"></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- 9. விவசாய நிலம் வாங்கும் கடன் -->
+<div class="loan-card">
+    <div class="poster">
+        <div class="emoji">🌱</div>
+        <div>
+            <h3 data-ta="விவசாய நிலம் வாங்கும் கடன்" data-en="Agricultural Land Purchase Loan">விவசாய நிலம் வாங்கும் கடன்</h3>
+            <p data-ta="விவசாய நிலம் வாங்குவதற்கான வங்கிக் கடன் வாய்ப்பு"
+               data-en="Bank finance options for purchasing agricultural land"></p>
+        </div>
+    </div>
+    <div class="loan-content">
+        <details>
+            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
+            <div class="details">
+                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
+                <p data-ta="விவசாய நோக்கத்திற்காக நிலம் வாங்குவதற்கு."
+                   data-en="For purchasing land for agricultural purposes."></p>
+                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
+                <p data-ta="சிறு மற்றும் குறு விவசாயிகளுக்கான சில வங்கித் திட்டங்கள் இருக்கலாம். நிலத்தின் சட்ட ஆவணங்களும் வங்கியின் விதிகளும் சரிபார்க்கப்படும்."
+                   data-en="Some bank schemes may support small and marginal farmers. Land title and bank conditions must be checked."></p>
+                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
+                <ul>
+                    <li data-ta="நிலத்தின் பட்டா மற்றும் பத்திரம்" data-en="Land patta and deed"></li>
+                    <li data-ta="அடையாள மற்றும் முகவரிச் சான்று" data-en="Identity and address proof"></li>
+                    <li data-ta="வருமான விவரம்" data-en="Income details"></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- 10. கால்நடை தீவனக் கடன் -->
+<div class="loan-card">
+    <div class="poster">
+        <div class="emoji">🌿</div>
+        <div>
+            <h3 data-ta="கால்நடை தீவன மற்றும் பராமரிப்புக் கடன்" data-en="Animal Feed and Maintenance Loan">கால்நடை தீவன மற்றும் பராமரிப்புக் கடன்</h3>
+            <p data-ta="கால்நடை தீவனம் மற்றும் அன்றாடப் பண்ணைச் செலவுகளுக்கு"
+               data-en="For animal feed and regular farm expenses"></p>
+        </div>
+    </div>
+    <div class="loan-content">
+        <details>
+            <summary data-ta="முழு விவரங்களைப் பார்க்க" data-en="View Full Details">முழு விவரங்களைப் பார்க்க</summary>
+            <div class="details">
+                <h4 data-ta="எதற்காக?" data-en="Purpose">எதற்காக?</h4>
+                <p data-ta="மாட்டுத் தீவனம், வைக்கோல், மருந்துகள் மற்றும் கால்நடை பராமரிப்புச் செலவுகளுக்கு."
+                   data-en="For cattle feed, fodder, medicines and animal maintenance expenses."></p>
+                <h4 data-ta="தகுதி" data-en="Eligibility">தகுதி</h4>
+                <p data-ta="கால்நடை வளர்ப்பில் ஈடுபட்டுள்ள மற்றும் வங்கி விதிகளின்படி தகுதியுள்ளவர்கள்."
+                   data-en="People engaged in animal husbandry who meet bank eligibility rules."></p>
+                <h4 data-ta="ஆவணங்கள்" data-en="Documents">ஆவணங்கள்</h4>
+                <ul>
+                    <li data-ta="அடையாளச் சான்று" data-en="Identity proof"></li>
+                    <li data-ta="கால்நடை விவரங்கள்" data-en="Livestock details"></li>
+                    <li data-ta="வங்கிக் கணக்கு விவரம்" data-en="Bank account details"></li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</div>
+
+<div class="notice">
+    <strong>குறிப்பு:</strong>
+    கடன் தொகை, வட்டி விகிதம், மானியம், தகுதி மற்றும் திருப்பிச் செலுத்தும் காலம் ஆகியவை வங்கி, திட்டம் மற்றும் விண்ணப்பதாரரின் தகுதியைப் பொறுத்து மாறுபடும். மேலே உள்ளவை கடன் வகைகள் பற்றிய பொதுவான தகவல்கள் மட்டுமே; இவை அனைத்தும் தற்போது விண்ணப்பிக்கக் கிடைக்கின்றன என்று பொருள் அல்ல. விண்ணப்பிக்கும் முன் சம்பந்தப்பட்ட வங்கியில் உறுதிப்படுத்தவும்.
+</div>
+
+</main>
+
+<footer>
+    <h3>Aara Farmers 🌾</h3>
+    <p>விவசாயிகளுக்கு உதவும் ஒரு தகவல் தளம்</p>
+    <p>© 2026 Aara Farmers</p>
+</footer>
+
+<script>
+let currentLanguage = "ta";
+
+function toggleLanguage() {
+    currentLanguage = currentLanguage === "ta" ? "en" : "ta";
+
+    document.documentElement.lang = currentLanguage;
+
+    document.getElementById("subtitle").textContent =
+        currentLanguage === "ta"
+        ? "விவசாயிகளுக்கான கடன் தகவல்கள்"
+        : "Loan Information for Farmers";
+
+    document.getElementById("mainTitle").textContent =
+        currentLanguage === "ta"
+        ? "விவசாயக் கடன் திட்டங்கள்"
+        : "Agricultural Loan Options";
+
+    document.getElementById("introText").textContent =
+        currentLanguage === "ta"
+        ? "உங்களுக்குத் தேவையான கடன் வகையைத் தேர்ந்தெடுத்து அதன் விவரங்களைத் தெரிந்துகொள்ளுங்கள்."
+        : "Choose a loan category to learn more about it.";
+
+    document.getElementById("back").textContent =
+        currentLanguage === "ta"
+        ? "⬅ முகப்புக்குச் செல்ல"
+        : "⬅ Back to Home";
+
+    document.getElementById("langBtn").textContent =
+        currentLanguage === "ta"
+        ? "English"
+        : "தமிழ்";
+
+    document.querySelectorAll("[data-ta]").forEach(element => {
+        element.textContent =
+            element.getAttribute("data-" + currentLanguage);
+    });
+}
+</script>
+
+</body>
+</html>
